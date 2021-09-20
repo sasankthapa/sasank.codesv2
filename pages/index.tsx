@@ -6,7 +6,7 @@ import Header from '../components/Header'
 
 const Home: NextPage = () => {
   return (
-    <div >
+    <div className="mx-10">
       <Head>
         <title>Create Next App</title>
         <meta name="Sasank Thapa Portfolio" content="Sasank (Sashank) Thapa" />

@@ -30,7 +30,8 @@ const BackgroundShader:React.FC<ShaderMaterialProps> = (props) => {
 
                 void main(){
                     vec2 st=gl_FragCoord.xy/u_resolution;
-                    gl_FragColor=vec4(vec3(st.y,1.0,1.0),1.0);
+                    vec2 u_mouse_norm=u_mouse/u_resolution;
+                    gl_FragColor=vec4(vec3(st.y,sin(abs(u_time)),cos(abs(u_time))),u_mouse);
                 }
                 `
             }

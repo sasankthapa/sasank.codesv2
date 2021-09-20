@@ -4,9 +4,10 @@ import React,{ useEffect, useState} from 'react';
 import { Canvas, extend } from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
 import Background from '../../components/Background';
+import Island from './assets/Loader';
 
 const App:React.FC<{}>=()=>{
-        return <Canvas style={{width:'100vw',height:'100vh'}}>
+        return <Canvas gl={{alpha:true}} style={{width:'100vw',height:'100vh'}}>
                 <OrbitControls />
                 <ambientLight intensity={0.8} />
                 <mesh>
