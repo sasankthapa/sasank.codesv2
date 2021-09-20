@@ -3,7 +3,7 @@ import {NextPage} from 'next';
 import React,{ useEffect, useState} from 'react';
 import { Canvas, extend } from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
-import Background from './component/Background';
+import Background from '../../components/Background';
 
 const App:React.FC<{}>=()=>{
         return <Canvas style={{width:'100vw',height:'100vh'}}>
