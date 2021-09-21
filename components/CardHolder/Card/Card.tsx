@@ -4,7 +4,7 @@ import {CardProps} from '../types/Card.types'
 const Card:React.FC<CardProps> = ({title,github,tags}) => {
     const [active,setActive]=useState(false);
     //bgcolor, onhover animation, onclikc animation?
-    return <div className="rounded-lg"
+    return <div className="rounded-sm lg:rounded-lg"
             onClick={()=>setActive(prev=>!prev)}>
         <h1>{title}</h1>
         <div className="flex flex-nowrap">

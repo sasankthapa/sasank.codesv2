@@ -61,7 +61,7 @@ const Background:React.FC<MeshProps>=(props)=>{
 
     return <mesh ref={ref} {...props}>
         <planeGeometry attach="geometry" args={[10,10]} />
-        <BackgroundShader attach="material" />
+        <BackgroundShader attach="material"/>
     </mesh>
 }
 
