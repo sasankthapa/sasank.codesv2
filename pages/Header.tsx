@@ -3,7 +3,7 @@ import Image from 'next/image';
 import profileImage from '../public/profile.jpg'
 
 const HeaderContainer = () => {
-    return <header className="flex pt-4 text-center sm:px-20 lg:px-36 xl:px-48">
+    return <header className="flex pt-4 text-center transition-all sm:px-20 lg:px-36 xl:px-48 2xl:px-72">
         <h1 className="flex items-center justify-center flex-grow flex-shrink mt-2 text-5xl lg:text-7xl">Sasank Thapa</h1>
         <div className="flex flex-col justify-center p-10">
             Hello

@@ -30,8 +30,7 @@ const BackgroundShader:React.FC<ShaderMaterialProps> = (props) => {
 
                 void main(){
                     vec2 st=gl_FragCoord.xy/u_resolution;
-                    vec2 u_mouse_norm=u_mouse/u_resolution;
-                    gl_FragColor=vec4(vec3(st.y,sin(abs(u_time)),cos(abs(u_time))),u_mouse);
+                    gl_FragColor=vec4(vec3(1.0,1.0,st.y),st.x);
                 }
                 `
             }
@@ -43,10 +42,13 @@ const Background:React.FC<MeshProps>=(props)=>{
 
     useFrame(({clock,mouse},delta)=>{
         if(ref.current){
-            console.log(ref.current.material)
             let material=ref.current.material as THREE.ShaderMaterial
             material.uniforms.u_time={value:clock.getElapsedTime()};
-            material.uniforms.u_mouse={value:mouse};
+            let mouseX=(mouse.x+1.0)/2.0;
+            let mouseY=(mouse.y+1.0)/2.0;
+            console.log(mouseX,mouseY);
+            material.uniforms.u_mouse={value:new THREE.Vector2(mouseX,mouseY)};
+            material.needsUpdate=true;
         }
     })
 
