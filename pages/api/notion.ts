@@ -1,7 +1,6 @@
 import { Client } from "@notionhq/client"
-import {ChildPageBlock} from "@notionhq/client/build/src/api-types";
-
-console.log(process.env.NOTION_KEY)
+import {PagesRetrieveResponse} from "@notionhq/client/build/src/api-endpoints";
+import {Block, ChildPageBlock, Page, RichText} from "@notionhq/client/build/src/api-types";
 
 const notion = new Client({ auth: process.env.NOTION_KEY })
 
@@ -24,7 +23,7 @@ export const getAllBlocks=async(pageID:string)=>{
     return (await getBlockChildren(pageID))
 }
 
-const recursiveGetBlocks:(pageID:string)=>Promise<recursiveReturn|null>=async(pageID:string)=>{
+const recursiveGetBlocks:(pageID:string)=>Promise<recursiveReturn[]|null>=async(pageID:string)=>{
     const map={};
     const page=await getPage(pageID);
     console.log(page);
@@ -47,15 +46,66 @@ const recursiveGetBlocks:(pageID:string)=>Promise<recursiveReturn|null>=async(pa
     return mapObject;
 }
 
+const getPagesList=async(pageID:string)=>{
+    return (await getBlockChildren(pageID)).results
+}
+
+const getPageBlocks=async(pageID:string)=>{
+    const blockListObject=await getAllBlocks(pageID);
+    return blockListObject.results;
+}
+
+type notionDisplayObject={
+    name?:string,
+    emoji?:string,
+    github?:string,
+    link?:string,
+    info?:Array<string>
+}
+
+const createObject=(page:PagesRetrieveResponse,blockListObject:Block[])=>{
+    const toReturn:notionDisplayObject={
+        info:[]
+    }
+    if(page.properties.title.type==='title')
+        toReturn['name']=page.properties.title.title[0].plain_text
+    if(page.icon && page.icon.type==='emoji'){
+        toReturn['emoji']=page.icon.emoji
+    }
+    for(var i=0;i <blockListObject.length;i++){
+        const currentBlock=blockListObject[i];
+        switch(currentBlock.type){
+            case 'paragraph':
+                let [linkName,link]=currentBlock.paragraph.text.toString().split(':')
+                if(linkName.trim()==='github'){
+                    toReturn['github']=link;
+                }else if(linkName.trim()==='link'){
+                     toReturn['link']=link;
+                }
+                break;
+            case 'bulleted_list_item':
+                toReturn['info']?.push(currentBlock.bulleted_list_item.text[0].plain_text)
+        }
+    }
+    return toReturn
+}
+
+const getPageInfo=async(pageId:string)=>{
+    const page=await getPage(pageId);
+    if(page)
+        return page
+    return '';
+}
+
 export const loadAllData=async()=>{
     let pageID='e9cc8b2ef5014aee93d126ab5d595782'
-    await recursiveGetBlocks(pageID)
-    const blockListObject=await getAllBlocks(pageID);
-    const blockList=blockListObject.results;
-    console.log(blockListObject)
-    console.log(blockList)
-    for(var i=0;i < blockList.length;i++){
-        let curr=blockList[i] as ChildPageBlock;
-        console.log(curr.child_page.title);
+    const pages=await getPagesList(pageID)
+    const mapArr=[]
+    for(var i=0;i < pages.length;i++){
+        const pageId:string=pages[i].id;
+        const pageInfo=await getPageInfo(pageId)
+        if(pageInfo!=="")
+            mapArr.push(createObject(pageInfo,await getPageBlocks(pages[i].id)))
     }
+    return mapArr;
 }
