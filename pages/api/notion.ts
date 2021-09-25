@@ -84,7 +84,7 @@ const createObject=(page:PagesRetrieveResponse,blockListObject:Block[])=>{
                 }
                 break;
             case 'bulleted_list_item':
-                toReturn['info']?.push(currentBlock.bulleted_list_item.text[0].plain_text)
+                toReturn['info']?.push(currentBlock.bulleted_list_item.text[0]?.plain_text)
         }
     }
     return toReturn
@@ -97,9 +97,9 @@ const getPageInfo=async(pageId:string)=>{
     return '';
 }
 
-export const loadAllData=async()=>{
-    let pageID='e9cc8b2ef5014aee93d126ab5d595782'
-    const pages=await getPagesList(pageID)
+const loadPageData=async(page:string|undefined)=>{
+    if(page===undefined) return []
+    const pages=await getPagesList(page)
     const mapArr=[]
     for(var i=0;i < pages.length;i++){
         const pageId:string=pages[i].id;
@@ -108,4 +108,12 @@ export const loadAllData=async()=>{
             mapArr.push(createObject(pageInfo,await getPageBlocks(pages[i].id)))
     }
     return mapArr;
+}
+
+export const loadAllData=async()=>{
+    return {
+        recent:await loadPageData(process.env.PAGE_RECENT),
+        frontend:await loadPageData(process.env.PAGE_FRONTEND),
+        ml:await loadPageData(process.env.PAGE_ML),
+    }
 }

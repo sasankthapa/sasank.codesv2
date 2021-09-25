@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import {CardProps} from '../types/Card.types'
+import {TransitionGroup} from 'react-transition-group';
+import {CardProps} from '../../../types/Card.types'
 
 const Card:React.FC<CardProps> = ({title,github,tags}) => {
     const [active,setActive]=useState(false);
@@ -8,9 +9,13 @@ const Card:React.FC<CardProps> = ({title,github,tags}) => {
             onClick={()=>setActive(prev=>!prev)}>
         <h1>{title}</h1>
         <div className="flex flex-nowrap">
+        <TransitionGroup component={null}>
             {tags.map((tag)=>{
-                return <span key={title+tag.tag} className={tag.class}>tag.tag</span>
+                return <CSSTransition>
+                    <span key={title+tag.tag} className={tag.class}>tag.tag</span>
+                </CSSTransition>
             })}
+        </TransitionGroup>
         </div>
     </div>
 
