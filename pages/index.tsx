@@ -4,7 +4,7 @@ import MainContainer from './MainContainer'
 
 const Home: NextPage<StaticProps> = (props) => {
   return (
-    <div >
+    <div>
       <Head>
         <title>Sasank Thapa Portfolio</title>
         <meta name="Sasank Thapa Portfolio" content="Sasank (Sashank) Thapa" />
