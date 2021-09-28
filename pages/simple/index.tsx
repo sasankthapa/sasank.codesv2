@@ -6,7 +6,7 @@ import Main from './Main';
 
 const Home: NextPage<StaticProps> = (props) => {
   return (
-    <div >
+    <div className="h-screen bg-gray-300">
       <Head>
         <title>Sasank Thapa Portfolio</title>
         <meta name="Sasank Thapa Portfolio" content="Sasank (Sashank) Thapa" />

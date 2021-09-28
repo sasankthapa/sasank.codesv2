@@ -1,10 +1,12 @@
-type NotionCard={
+export type NotionCard={
     name:string,
     emoji:string,
+    github?:string,
+    link?:string,
     info:Array<string>
 }
 
-interface StaticProps{
+export interface StaticProps{
     recent:Array<NotionCard>,
     frontend:Array<NotionCard>,
     ml:Array<NotionCard>

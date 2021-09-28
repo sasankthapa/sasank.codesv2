@@ -26,7 +26,7 @@ const MainContainer:React.FC<{}>=()=>{
                 </div>
                 <div className="flex flex-col items-center justify-center w-full md:flex-row gap-3">
                     <Link href="https://github.com/sasankthapa"><a target="_blank" rel="noreferrer"><FaGithub className="my-1 text-xl lg:text-2xl"/></a></Link>
-                    <Link  href="https://leetcode.com/sasankthapa"><a target="_blank" rel="noreferrer"><SiLeetcode className="my-1 text-xl lg:text-2xl"/></a></Link>
+                    <Link href="https://leetcode.com/sasankthapa"><a target="_blank" rel="noreferrer"><SiLeetcode className="my-1 text-xl lg:text-2xl"/></a></Link>
                     <Link href="https://linkedin.com/in/sasank-t-b815b1104/"><a target="_blank" rel="noreferrer"><FaLinkedin className="my-1 text-xl lg:text-2xl"/></a></Link>
                 </div>
             </div>
