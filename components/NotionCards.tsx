@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import SlideFromTop from './hoc/SlideFromRight';
-import SlideFromRight from './hoc/SlideFromRight'
+import {SlideFromRight} from './hoc/SlidesAnimation';
+import {NotionCard} from '../types/notion.types'
 
 interface NotionCardProps{
     data:NotionCard,
@@ -12,11 +12,6 @@ const NotionCards:React.FC<NotionCardProps>=({data,delay})=>{
     return <SlideFromRight delay={delay*500}>
         <div onClick={()=>setActive(prev=>!prev)} className="p-5 bg-blue-200 shadow-lg cursor-pointer rounded-md">
             <h1>{data.name}</h1>
-            <div className={`${active?'block':'hidden'} flex`}>
-                {data.info.map((val:string,index:number)=>{
-                    return <p key={val[0]+index}>{val}</p>
-                })}
-            </div>
         </div>
     </SlideFromRight>
 }

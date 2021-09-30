@@ -1,10 +1,4 @@
-export type NotionCard={
-    name:string,
-    emoji:string,
-    github?:string,
-    link?:string,
-    info:Array<string>
-}
+import {NotionCard} from './notion.types'
 
 export interface StaticProps{
     recent:Array<NotionCard>,

@@ -13,7 +13,7 @@ export default class App extends React.Component<Props,State>{
     }
 
     genRandomPoints=(n:number)=>{
-
+        
     }
 
     componentDidMount(){
@@ -21,13 +21,17 @@ export default class App extends React.Component<Props,State>{
     }
 
     render(){
-        return <div className="flex w-screen h-screen">
+        return <div className="flex flex-col w-screen h-screen md:flex-row">
             <CustomCanvas />
-            <div className="w-3/5 h-full p-2 text-white bg-blue-500">
+            <div className="h-full p-2 text-white bg-blue-500 md:w-3/5">
+                <div className="">
+                Motive: This page was designed to 
+                </div>
                 <h2 className="font-bold">Finding the convex hull of n points.</h2>
                 <h4>Graham Scan Algorithm</h4>
                 <pre>
                 <code>
+                {'>'}    hello
                 </code>
                 </pre>
             </div>
