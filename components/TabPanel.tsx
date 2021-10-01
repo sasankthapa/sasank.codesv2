@@ -1,6 +1,7 @@
 import React from 'react'
 import {Tab} from '@headlessui/react';
 import {NotionCard} from '../types/notion.types'
+import Link from 'next/link'
 import {FaGithub} from 'react-icons/fa';
 
 interface TabPanelProps{
@@ -16,7 +17,9 @@ const TabPanel:React.FC<TabPanelProps> = ({data}) => {
             >
              <h3 className="inline font-medium 2xl:text-lg">
                 {curr.name}
-                {curr.github?<FaGithub className="float-right w-4 h-4"/>:null}
+                {curr.github?
+                    <Link href={curr.github}><a target="_blank" rel="noreferrer"><FaGithub className="float-right w-4 h-4"/></a></Link>
+                :null}
              </h3>
              <ul className="text-sm list-disc ml-7 xl:text-base">
              {curr.info.map((_info,index)=>{
