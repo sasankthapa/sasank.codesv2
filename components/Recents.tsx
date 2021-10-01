@@ -1,5 +1,6 @@
 import NotionCards from './NotionCards'
 import React from 'react'
+import {NotionCard} from '../types/notion.types'
 
 interface RecentProps{
     items:Array<NotionCard>

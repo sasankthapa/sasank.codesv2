@@ -23,29 +23,6 @@ export const getAllBlocks=async(pageID:string)=>{
     return (await getBlockChildren(pageID))
 }
 
-const recursiveGetBlocks:(pageID:string)=>Promise<recursiveReturn[]|null>=async(pageID:string)=>{
-    const map={};
-    const page=await getPage(pageID);
-    console.log(page);
-    const blocksChildrenObject=await getAllBlocks(pageID);
-    if(blocksChildrenObject.has_more){
-        console.log('Too much data');
-        return null;
-    }
-    const mapObject:recursiveReturn[]=[];
-    blocksChildrenObject.results.forEach(async(item)=>{
-        if(item.type === 'child_page'){
-            const generatedNotionPages=await recursiveGetBlocks(item.id);
-            if(generatedNotionPages!==null){
-                mapObject.push(generatedNotionPages);
-            }
-        }else{
-
-        }
-    })
-    return mapObject;
-}
-
 const getPagesList=async(pageID:string)=>{
     return (await getBlockChildren(pageID)).results
 }

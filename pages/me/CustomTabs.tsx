@@ -12,32 +12,27 @@ interface CustomTabsProps{
 }
 
 function createClasses(...classes:string[]){
+    console.log(classes)
     return classes.join(' ');
 }
 
 const CustomTabs:React.FC<CustomTabsProps>=({recent,frontend,ml,algo})=>{
     const createTab=(tabname:String)=>{
         return (
-        <Tab as={'div'} className={(selected)=>createClasses(
-        "text-center leading-4 transition-all flex-grow p-2 bg-blue-400 rounded-xl font-normal text-white",
-        selected?"focus:ring-2 ring-offset-1 ring-green-600":"")
-        }>{tabname}</Tab>
+        <Tab className={({selected})=>createClasses(
+        "text-center text-white p-2 box-border bg-green-400 rounded-md font-normal focus:ring-2 ring-offset-1 mx-1 ring-green-600",
+        selected?"border-2 border-green-400":"bg-blue-400")}>{tabname}</Tab>
         )
-    }
-
-    const getPanel=(data:Array<NotionCard>)=>{
-        return data.map((curr)=>{
-        })
     }
 
     return (
         <SlideFromTop >
-            <div className="w-full mt-5 md:mt-7">
+            <div className="w-full mt-7">
                 <Tab.Group defaultIndex={0}>
-                    <Tab.List as={'div'} className="flex justify-center w-full gap-4">
-                        {createTab('Recents')}
-                        {createTab('Web ')}
-                        {createTab('Machine Learning')}
+                    <Tab.List as={'div'} className="flex text-sm">
+                        {createTab('Recent')}
+                        {createTab('Frontend')}
+                        {createTab('Data Science')}
                         {createTab('Algorithms')}
                     </Tab.List>
                     <Tab.Panels>

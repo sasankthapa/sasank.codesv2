@@ -3,6 +3,7 @@ import Head from 'next/head'
 import {GetStaticProps} from 'next';
 import {loadAllData} from '../api/notion';
 import Main from './Main';
+import {StaticProps} from '../../types/main.types'
 
 const Home: NextPage<StaticProps> = (props) => {
   return (

@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import MainContainer from './MainContainer'
 
-const Home: NextPage<StaticProps> = (props) => {
+const Home: NextPage<{}> = () => {
   return (
     <div>
       <Head>

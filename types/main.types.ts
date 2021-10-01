@@ -1,6 +1,6 @@
 import {NotionCard} from './notion.types'
 
-interface StaticProps{
+export interface StaticProps{
     recent:Array<NotionCard>,
     frontend:Array<NotionCard>,
     ml:Array<NotionCard>,
