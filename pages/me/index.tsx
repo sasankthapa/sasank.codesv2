@@ -7,7 +7,7 @@ import {StaticProps} from '../../types/main.types'
 
 const Home: NextPage<StaticProps> = (props) => {
   return (
-    <div className="h-screen bg-gray-300">
+    <div className="min-h-screen bg-gray-300">
       <Head>
         <title>Sasank Thapa Portfolio</title>
         <meta name="Sasank Thapa Portfolio" content="Sasank (Sashank) Thapa" />
