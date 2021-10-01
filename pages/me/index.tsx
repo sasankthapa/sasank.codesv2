@@ -9,9 +9,9 @@ const Home: NextPage<StaticProps> = (props) => {
   return (
     <div className="min-h-screen bg-gray-300">
       <Head>
-        <title>Sasank Thapa Portfolio</title>
-        <meta name="Sasank Thapa Portfolio" content="Sasank (Sashank) Thapa" />
-        {/*<link rel="icon" href="/favicon.ico" />*/}
+        <title>Sasank Thapa</title>
+        <meta name="Sasank Thapa" content="Work by Sasank, About, Sasank" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
     <Main {...props}/>

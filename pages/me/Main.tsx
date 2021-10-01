@@ -13,7 +13,7 @@ const DynamicContent=dynamic(
 const Main:React.FC<StaticProps>=({recent,frontend,ml,algo})=>{
     const [showTabs,setShowTabs]=useState(false);
 
-    return <div className="p-2 overflow-hidden font-inter sm:px-16 md:pt-4 md:px-32 lg:px-52 xl:px-60 2xl:px-80 2xl:pt-10">
+    return <div className="p-2 overflow-hidden min-h-32 font-inter sm:px-16 md:pt-4 md:px-32 lg:px-52 xl:px-60 2xl:px-80 2xl:pt-10">
       <Header/>
       <SlideFromRight> 
       <div className="w-full mt-3 text-left md:text-base xl:text-xl md:mt-6 xl:mt-10">

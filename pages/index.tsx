@@ -6,9 +6,9 @@ const Home: NextPage<{}> = () => {
   return (
     <div>
       <Head>
-        <title>Sasank Thapa Portfolio</title>
-        <meta name="Sasank Thapa Portfolio" content="Sasank (Sashank) Thapa" />
-        {/*<link rel="icon" href="/favicon.ico" />*/}
+        <title>Sasank Thapa</title>
+        <meta name="Sasank Thapa Portfolio Links" content="Links" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <MainContainer />
     </div>
