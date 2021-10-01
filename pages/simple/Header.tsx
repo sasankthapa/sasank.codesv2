@@ -1,12 +1,6 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import profileImage from '../../public/static/images/profile.jpg'
-
-const ButtonsComponent=dynamic(
-    ()=>import('../../components/HeaderButtons/ButtonsHolder'),
-    {ssr:false}
-)
 
 const HeaderContainer = () => {
     return <header className="flex pb-2 text-center border-b-2 border-gray-500 xl:pb-5 sm:mt-0 transition-all ">

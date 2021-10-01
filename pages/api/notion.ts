@@ -115,5 +115,6 @@ export const loadAllData=async()=>{
         recent:await loadPageData(process.env.PAGE_RECENT),
         frontend:await loadPageData(process.env.PAGE_FRONTEND),
         ml:await loadPageData(process.env.PAGE_ML),
+        algo:await loadPageData(process.env.PAGE_ALGO)
     }
 }
