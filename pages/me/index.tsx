@@ -21,7 +21,6 @@ const Home: NextPage<StaticProps> = (props) => {
 
 export const getStaticProps:GetStaticProps=async()=>{
     const data=await loadAllData();
-    console.log(data)
     
     return {
         props:{

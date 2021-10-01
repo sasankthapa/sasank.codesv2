@@ -25,9 +25,9 @@ const MainContainer:React.FC<{}>=()=>{
                     Sashank Thapa
                 </h1>
                 <div className="w-full p-2 mb-3 rounded-lg cursor-pointer hover:bg-green-400 transition-colors shadow-sm bg-blue-50">
-                    <Link href="simple"><a>sasank.codes/work</a></Link>
+                    <Link href="me"><a>sasank.codes/work</a></Link>
                 </div>
-                <div className="flex flex-row items-center justify-center w-full gap-10 md:gap-3">
+                <div className="flex flex-row items-center justify-center w-full mt-2 gap-10 md:gap-3">
                     <Link href="https://sasank.codes/assets/resume.pdf"><a target="_blank" rel="noreferrer"><TiDocumentText className="m-1 text-xl lg:text-2xl"/></a></Link>
                     <Link href="https://github.com/sasankthapa"><a target="_blank" rel="noreferrer"><FaGithub className="m-1 text-xl lg:text-2xl"/></a></Link>
                     <Link href="https://leetcode.com/sasankthapa"><a target="_blank" rel="noreferrer"><SiLeetcode className="m-1 text-xl lg:text-2xl"/></a></Link>

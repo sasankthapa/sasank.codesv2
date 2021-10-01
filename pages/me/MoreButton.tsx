@@ -18,7 +18,7 @@ const MoreButton:React.FC<MoreButtonProps>=({clicked})=>{
           enter={`transform transition duration-1000`}
           enterFrom="translate-y-1/2 opacity-0"
           enterTo="translate-y-0 opacity-100" 
-          leave="transition duration-100"
+          leave="transition-opacity duration-1000"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >

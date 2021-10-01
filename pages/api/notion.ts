@@ -5,8 +5,13 @@ import {Block, ChildPageBlock, Page, RichText} from "@notionhq/client/build/src/
 const notion = new Client({ auth: process.env.NOTION_KEY })
 
 const getPage=async(pageId:string)=>{
-    const response = await notion.pages.retrieve({ page_id: pageId }).catch((e)=>console.log(e));
-    return response
+    try{
+        const response = await notion.pages.retrieve({ page_id: pageId });
+        return response
+    }catch(e){
+        console.log(e)
+        return null
+    }
 }
 
 const getBlock=async(blockId:string)=>{
@@ -36,7 +41,6 @@ type notionDisplayObject={
     name?:string,
     emoji?:string,
     github?:string,
-    link?:string,
     info?:Array<string>
 }
 
@@ -53,12 +57,11 @@ const createObject=(page:PagesRetrieveResponse,blockListObject:Block[])=>{
         const currentBlock=blockListObject[i];
         switch(currentBlock.type){
             case 'paragraph':
-                let [linkName,link]=currentBlock.paragraph.text.toString().split(':')
-                if(linkName.trim()==='github'){
-                    toReturn['github']=link;
-                }else if(linkName.trim()==='link'){
-                     toReturn['link']=link;
-                }
+                let texts=currentBlock.paragraph.text[0]
+                if(texts)
+                    if(texts.href){
+                        toReturn['github']=texts.href
+                    }
                 break;
             case 'bulleted_list_item':
                 toReturn['info']?.push(currentBlock.bulleted_list_item.text[0]?.plain_text)
@@ -67,31 +70,26 @@ const createObject=(page:PagesRetrieveResponse,blockListObject:Block[])=>{
     return toReturn
 }
 
-const getPageInfo=async(pageId:string)=>{
-    const page=await getPage(pageId);
-    if(page)
-        return page
-    return '';
-}
-
 const loadPageData=async(page:string|undefined)=>{
     if(page===undefined) return []
     const pages=await getPagesList(page)
     const mapArr=[]
     for(var i=0;i < pages.length;i++){
+        if(pages[i].type!=='child_page') continue;
         const pageId:string=pages[i].id;
-        const pageInfo=await getPageInfo(pageId)
-        if(pageInfo!=="")
+        const pageInfo=await getPage(pageId)
+        if(pageInfo!==null)
             mapArr.push(createObject(pageInfo,await getPageBlocks(pages[i].id)))
     }
     return mapArr;
 }
 
 export const loadAllData=async()=>{
+    const recent=await loadPageData(process.env.PAGE_RECENT)
+    const frontend=await loadPageData(process.env.PAGE_FRONTEND)
+    const ml=await loadPageData(process.env.PAGE_ML)
+    const algo=await loadPageData(process.env.PAGE_ALGO)
     return {
-        recent:await loadPageData(process.env.PAGE_RECENT),
-        frontend:await loadPageData(process.env.PAGE_FRONTEND),
-        ml:await loadPageData(process.env.PAGE_ML),
-        algo:await loadPageData(process.env.PAGE_ALGO)
+        recent,frontend,ml,algo
     }
 }

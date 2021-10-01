@@ -1,6 +1,6 @@
 import React from 'react'
 import {Tab} from '@headlessui/react';
-import {NotionCard} from '../../types/notion.types'
+import {NotionCard} from '../types/notion.types'
 import {FaGithub} from 'react-icons/fa';
 
 interface TabPanelProps{
@@ -14,13 +14,15 @@ const TabPanel:React.FC<TabPanelProps> = ({data}) => {
             key={curr.name[0]+index}
             className="relative p-3 mt-2 bg-gray-200 cursor-pointer rounded-md"
             >
-             <h3 className="inline text-sm font-medium">
+             <h3 className="inline font-medium 2xl:text-lg">
                 {curr.name}
-                {curr.github?<FaGithub className="float-right"/>:null}
+                {curr.github?<FaGithub className="float-right w-4 h-4"/>:null}
              </h3>
+             <ul className="text-sm list-disc ml-7 xl:text-base">
              {curr.info.map((_info,index)=>{
-                 return <p key={_info[0]+index}>{_info}</p>
+                 return <li key={_info[0]+index}>{_info}</li>
              })}
+             </ul>
         </li>
     }):null}</ul></Tab.Panel>
 }
