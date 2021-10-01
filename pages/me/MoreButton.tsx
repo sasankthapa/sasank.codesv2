@@ -9,7 +9,7 @@ const MoreButton:React.FC<MoreButtonProps>=({clicked})=>{
     const [show,setShow]=useState(false)
 
     useEffect(()=>{
-        setTimeout(()=>setShow(true), 5000)
+        setTimeout(()=>setShow(true), 3000)
     },[])
 
     return <Transition
