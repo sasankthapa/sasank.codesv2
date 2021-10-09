@@ -3,6 +3,7 @@ import {OrbitControls} from '@react-three/drei';
 import {Canvas, RootState} from '@react-three/fiber';
 import React, {useState, useEffect, Suspense} from 'react'
 import {CustomCanvasProps} from '../../types/convexhull/app.types';
+import Euclid from './Euclid';
 
 const Plane:React.FC<{}>=()=>{
     return <mesh position={[0,0,0]}>
@@ -15,7 +16,6 @@ const CustomCanvas:React.FC<CustomCanvasProps>=({points,lines})=>{
     const [clientSide,setClientSide]=useState(false);
 
     const handleCreated=(state:RootState)=>{
-        console.log(state.size)
     }
 
     useEffect(()=>{
@@ -26,12 +26,11 @@ const CustomCanvas:React.FC<CustomCanvasProps>=({points,lines})=>{
 
     const PointBuffer=(new THREE.BufferGeometry()).setFromPoints(points)
 
-    return <>{ clientSide? <Canvas camera={{position:[0,0,10]}} className="w-full h-full" onCreated={handleCreated}>
+    return <>{ clientSide? <Canvas 
+            className="w-full h-full" onCreated={handleCreated}>
             <ambientLight intensity={0.5}/>
             <Suspense fallback={null}>
-                <points geometry={PointBuffer}>
-                    <pointsMaterial attach="material"/>
-                </points>
+                <Euclid points={points}/>
                 {/*<Plane />*/}
             </Suspense>
         </Canvas>:
