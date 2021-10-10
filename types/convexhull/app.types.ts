@@ -1,15 +1,14 @@
 export interface AlgorithmDisplayProps{
+    step:()=>void
 
 }
 
 export interface EuclidProps extends CustomCanvasProps{
 }
 
-type line=[THREE.Vector2,THREE.Vector2]
-
-export interface CustomCanvasProps{
-    points:Array<THREE.Vector2>,
-    lines?:Array<line>,
+export interface LineRendererProps{
+    lineList:Array<[THREE.Vector2,THREE.Vector2]>,
+    lineColor:THREE.Color
 }
 
 export interface IStack<T>{
@@ -19,10 +18,27 @@ export interface IStack<T>{
     size():number
 }
 
-export interface State{
-    stackArr:Array<THREE.Vector2>,
+export interface IGrahamScan{
+    stack:IStack<THREE.Vector2>,
     points:Array<THREE.Vector2>,
     hull:Array<THREE.Vector2>,
+    start:THREE.Vector2|undefined,
+    mid:THREE.Vector2|undefined,
+    end:THREE.Vector2|undefined,
+}
+
+type line=[THREE.Vector2,THREE.Vector2]
+
+export interface CustomCanvasProps{
+    points:Array<THREE.Vector2>,
+    lines?:Array<line>,
+}
+
+
+export interface State{
+    step:boolean,
+    needsUpdate:boolean,
+    grahamScan:IGrahamScan,
     clientSide:boolean,
     width:number,
     height:number

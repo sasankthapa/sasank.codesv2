@@ -21,7 +21,7 @@ const Euclid:React.FC<EuclidProps>=({points})=>{
     
     return <group position={[-100,-100,0]}>
         <mesh onPointerMove={(e)=>{console.log(e.movementX)}} position={[100,100,0]}>
-            <planeGeometry attach="geometry" args={[100,100,100,100]}/>
+            <planeGeometry attach="geometry" args={[10,10,10,10]}/>
             <meshStandardMaterial wireframe={true} />
         </mesh>
         <group position={[100,100,0]}>

@@ -64,7 +64,7 @@ export const genRandomPoints=(n:number,sparse:number)=>{
     return toReturn;
 }
 
-class Stack<T> implements IStack<T>{
+export class Stack<T> implements IStack<T>{
     private storage:Array<T>=[];
     
     push(item:T){
