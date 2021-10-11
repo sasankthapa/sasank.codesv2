@@ -26,7 +26,7 @@ const CustomCanvas:React.FC<CustomCanvasProps>=({points,lines})=>{
 
     const PointBuffer=(new THREE.BufferGeometry()).setFromPoints(points)
 
-    return <>{ clientSide? <Canvas 
+    return <>{ clientSide? <Canvas camera={{position:[0,0,20]}}
             className="w-full h-full" onCreated={handleCreated}>
             <ambientLight intensity={0.5}/>
             <Suspense fallback={null}>
