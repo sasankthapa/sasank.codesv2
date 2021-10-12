@@ -8,7 +8,7 @@ import Image from 'next/image'
 import profileImage from '../public/static/images/profile.jpg'
 
 const MainContainer:React.FC<{}>=()=>{
-    return <div className="relative flex items-start items-center justify-center w-screen h-screen bg-gray-300">
+    return <div className="relative flex box-content items-start items-center justify-center w-screen h-screen bg-gray-300">
         <Transition
           as={Fragment}
           appear={true}
@@ -33,7 +33,6 @@ const MainContainer:React.FC<{}>=()=>{
                 <div className="flex flex-row items-center justify-center w-full mt-2 gap-10 md:gap-3">
                     <Link href="https://sasank.codes/assets/resume.pdf"><a target="_blank" rel="noreferrer"><TiDocumentText className="m-1 text-xl lg:text-2xl"/></a></Link>
                     <Link href="https://github.com/sasankthapa"><a target="_blank" rel="noreferrer"><FaGithub className="m-1 text-xl lg:text-2xl"/></a></Link>
-                    <Link href="https://leetcode.com/sasankthapa"><a target="_blank" rel="noreferrer"><SiLeetcode className="m-1 text-xl lg:text-2xl"/></a></Link>
                     <Link href="https://linkedin.com/in/sasank-t-b815b1104/"><a target="_blank" rel="noreferrer"><FaLinkedin className="m-1 text-xl lg:text-2xl"/></a></Link>
                 </div>
             </div>
