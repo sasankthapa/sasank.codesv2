@@ -4,6 +4,7 @@ export interface AlgorithmDisplayProps{
 }
 
 export interface EuclidProps extends CustomCanvasProps{
+    hull:Array<THREE.Vector2>
 }
 
 export interface LineRendererProps{
