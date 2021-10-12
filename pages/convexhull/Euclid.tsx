@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {useFrame, useLoader, useThree} from '@react-three/fiber'
 import React, {useEffect, useRef, useState} from 'react'
 import {EuclidProps} from '../../types/convexhull/app.types'
+import { TextureLoader } from 'three/src/loaders/TextureLoader.js';
 
 const Plane:React.FC<{}>=()=>{
     return <mesh>
@@ -12,6 +13,8 @@ const Plane:React.FC<{}>=()=>{
 
 const Euclid:React.FC<EuclidProps>=({points})=>{
     const camera=useThree(state=>state.camera);
+
+    const texture=useLoader(TextureLoader,'assets/circlesprite.png');
 
     const handleDrag=()=>{
         console.log('her');
@@ -26,7 +29,7 @@ const Euclid:React.FC<EuclidProps>=({points})=>{
         </mesh>
         <group position={[100,100,0]}>
             <points geometry={PointBuffer}>
-                <pointsMaterial color={0x00ff00} attach="material"/>
+                <pointsMaterial map={texture} color={0x00ff00} attach="material"/>
             </points>
         </group>
     </group>

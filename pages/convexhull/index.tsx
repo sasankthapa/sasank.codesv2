@@ -1,10 +1,14 @@
-import * as THREE from 'three';
 import React from "react";
 import {State,Props} from '../../types/convexhull/app.types'
 import AlgorithmDisplay from "./AlgorithmDisplay";
-import CustomCanvas from "./CustomCanvas";
+import dynamic from 'next/dynamic'
 import {genRandomPoints} from './functions/Utils';
 import {GrahamScan} from './functions/GrahamScan';
+
+const DynamicCanvas=dynamic(
+    ()=>import('./CustomCanvas'),
+    {ssr:false}
+)
 
 export default class App extends React.Component<Props,State>{
     constructor(props:Props){
@@ -40,7 +44,7 @@ export default class App extends React.Component<Props,State>{
 
     render(){
         return <div className="flex flex-col w-screen h-screen md:flex-row">
-            <CustomCanvas points={this.state.grahamScan.points}/>
+            <DynamicCanvas points={this.state.grahamScan.points}/>
             <AlgorithmDisplay step={this.step.bind(this)}/>
         </div>
     }
