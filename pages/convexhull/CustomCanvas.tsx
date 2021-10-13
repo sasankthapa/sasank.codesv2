@@ -4,7 +4,7 @@ import { Vector2 } from 'three';
 import {CustomCanvasProps} from '../../types/convexhull/app.types';
 import Euclid from './Euclid';
 
-const CustomCanvas:React.FC<CustomCanvasProps>=({points,lines})=>{
+const CustomCanvas:React.FC<CustomCanvasProps>=({data})=>{
     useEffect(()=>{
     },[])
 
@@ -12,7 +12,7 @@ const CustomCanvas:React.FC<CustomCanvasProps>=({points,lines})=>{
             className='w-full h-full'>
         <ambientLight intensity={1}/>
         <Suspense fallback={null}>
-            <Euclid />
+            <Euclid pointsData={data.pointsData} pointData={data.pointData} linesData={data.linesData} planeArgs={[10,10,10,10]}/>
         </Suspense>
     </Canvas>
 }

@@ -35,7 +35,7 @@ export class GrahamScan implements IGrahamScan{
     display={
         points:{type:'points',color:0xff00ff} as points,
         hull:{type:'points',color:0xff00ff} as points,
-        lowest:{type:'point',color:0xff00ff} as point,
+        lowest:{type:'point',color:0xffffff} as point,
         start:{type:'point',color:0xff00ff} as point,
         mid:{type:'point',color:0xff00ff} as point,
         end:{type:'point',color:0xff00ff}as point

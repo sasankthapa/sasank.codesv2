@@ -20,16 +20,14 @@ type AddNullType<T> ={
     [Property in keyof T]:T[Property]|null;
 }
 
-export interface ContextData extends AddNullType<PointsRendererProps>, AddNullType<LineRendererProps> {}
-
-export type GenerateContext = (context:ContextData,display:IGrahamScan['display']) => ContextData
-export type GenerateInitialContext = (display:IGrahamScan['display']) => ContextData
+export interface RenderData extends PointsRendererProps, LineRendererProps {}
 
 export interface AlgorithmDisplayProps{
     step:()=>void
 }
 
-export interface EuclidProps extends CustomCanvasProps{
+export interface EuclidProps extends RenderData{
+    planeArgs:[number,number,number,number]
 }
 
 export interface IStack<T>{
@@ -54,6 +52,7 @@ export interface IGrahamScan{
 }
 
 export interface CustomCanvasProps{
+    data:RenderData;
 }
 
 export interface State{
@@ -62,8 +61,8 @@ export interface State{
     grahamScan:IGrahamScan,
     clientSide:boolean,
     width:number,
-    height:number
-    dataContextState:ContextData|null
+    height:number,
+    render:RenderData
 }
 
 export interface Props{

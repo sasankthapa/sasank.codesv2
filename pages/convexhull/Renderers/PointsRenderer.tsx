@@ -9,24 +9,24 @@ const PointsRenderer:React.FC<PointsRendererProps>=({pointData,pointsData})=>{
 
     const pointBuffers=useMemo(()=>{
         return pointData.map((point)=>{
-            return new THREE.BufferGeometry().setFromPoints([point.data])
+            return new THREE.BufferGeometry().setFromPoints(point.data?[point.data]:[])
         })
     },[pointData])
 
     const pointsBuffers=useMemo(()=>{
         return pointsData.map((point)=>{
-            return new THREE.BufferGeometry().setFromPoints(point.data)
+            return new THREE.BufferGeometry().setFromPoints(point.data||[])
         })
     },[pointsData])
 
     return <group>
         {pointsData?.map((point,index)=>{
-            return <points key={point.index} geometry={pointsBuffers[index]}>
+            return <points key={'point'+index} geometry={pointsBuffers[index]}>
                 <pointsMaterial transparent={true} opacity={1} attach="material" map={texture} color={point.color}/>
             </points>
         })}
         {pointData?.map((point,index)=>{
-            return <points key={point.index} geometry={pointBuffers[index]}>
+            return <points key={'points'+index} geometry={pointBuffers[index]}>
                 <pointsMaterial attach="material" map={texture} color={point.color}/>
             </points>
         })}

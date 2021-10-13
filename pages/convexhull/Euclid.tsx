@@ -6,7 +6,7 @@ import LineRenderer from './Renderers/LineRenderer';
 import CustomCamera from './Camera/CustomCamera';
 import {  Vector2 } from 'three';
 
-const Euclid:React.FC<EuclidProps>=({})=>{
+const Euclid:React.FC<EuclidProps>=({pointData,pointsData,linesData,planeArgs})=>{
     const plane=useRef(null);
     const [cameraPos,setCameraPos]=useState(new Vector2(0,0));
     const [cameraZoom,setCameraZoom]=useState(10);
@@ -43,14 +43,12 @@ const Euclid:React.FC<EuclidProps>=({})=>{
         <CustomCamera targetPosition={cameraPos} zoom={cameraZoom}/>
         <group position={[-100,-100,0]}>
         <mesh ref={plane} onWheel={handleWheel} onPointerMove={dragMove} onPointerDown={dragStart} onPointerUp={dragEnd} position={[100,100,0]}>
-            <planeGeometry attach="geometry" args={[20,20,10,10]}/>
+            <planeGeometry attach="geometry" args={planeArgs}/>
             <meshStandardMaterial />
         </mesh>
         <group position={[100,100,0.1]}>
-            {//linesData!==null?<LineRenderer linesData={linesData} />:null}
-}
-            {//pointData!==null && pointsData!==null?<PointsRenderer pointData={pointData} pointsData={pointsData}/>:null}
-        }
+            {linesData!==null?<LineRenderer linesData={linesData} />:null}
+            {pointData!==null && pointsData!==null?<PointsRenderer pointData={pointData} pointsData={pointsData}/>:null}
         </group>
     </group>
     </>

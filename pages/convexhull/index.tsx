@@ -1,11 +1,9 @@
 import React  from "react";
-import {State,Props } from '../../types/convexhull/app.types'
+import {State,Props, point, points } from '../../types/convexhull/app.types'
 import AlgorithmDisplay from "./AlgorithmDisplay";
 import dynamic from 'next/dynamic'
 import {genRandomPoints} from './functions/Utils';
 import {GrahamScan} from './functions/GrahamScan';
-import {baseContext, DataContext,genIniContextData} from './Context';
-
 const DynamicCanvas=dynamic(
     ()=>import('./CustomCanvas'),
     {ssr:false}
@@ -21,29 +19,46 @@ export default class App extends React.Component<Props,State>{
             clientSide:false,
             width:0,
             height:0,
-            dataContextState:baseContext
+            render:{
+                pointData:[],
+                pointsData:[],
+                linesData:[]
+            }
         }
     }
 
-    createPoints=async(n:number)=>{
-        const list=genRandomPoints(n,5);
+    createPoints=(n:number)=>{
         this.setState((prev)=>{
+            const list=genRandomPoints(n,5);
             const newState={...prev};
             newState.grahamScan.display.points['data']=list;
             return newState
         })
     }
 
-    getContextData(){
-        console.log(this.state.grahamScan.display)
-        const data=genIniContextData(this.state.grahamScan.display);
-        console.log(data)
+    updateRenderData=()=>{
+        this.setState(prev=>{
+            const toReturn={...prev.render}
+            for(const [k,v] of Object.entries(this.state.grahamScan.display)){
+                if(v.data){
+                    if(v.type==='point'){
+                        toReturn.pointData?.push(v as point);
+                    }else if(v.type==='points'){
+                        toReturn.pointsData?.push(v as points);
+                    }else if(v.type==='line'){
+                        toReturn.linesData?.push(v as points);
+                    }
+                }
+            }
+            return {
+                render:toReturn
+            }
+        })
     }
 
     componentDidMount(){
-        this.createPoints(10).then(()=>{
-            this.getContextData()
-        })
+        this.createPoints(10)
+        this.updateRenderData()
     }
 
     step(){
@@ -52,9 +67,7 @@ export default class App extends React.Component<Props,State>{
 
     render(){
         return <div className="flex flex-col w-screen h-screen md:flex-row">
-            <DataContext.Provider value={this.state.dataContextState||baseContext}>
-                <DynamicCanvas />
-            </DataContext.Provider>
+            <DynamicCanvas data={this.state.render}/>
             <AlgorithmDisplay step={this.step.bind(this)}/>
         </div>
     }
