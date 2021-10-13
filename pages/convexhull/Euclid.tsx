@@ -1,27 +1,34 @@
 import * as THREE from 'three';
-import {useFrame, useLoader, useThree} from '@react-three/fiber'
-import React, {useMemo, useRef, useState} from 'react'
+import {extend,useStore,useThree} from '@react-three/fiber'
+import React, { useEffect, useRef, useState } from 'react'
 import {EuclidProps} from '../../types/convexhull/app.types'
-import { TextureLoader } from 'three/src/loaders/TextureLoader.js';
 import PointsRenderer from './PointsRenderer';
-
-const Plane:React.FC<{}>=()=>{
-    return <mesh>
-            <planeGeometry attach="geometry" args={[10,10]}/>
-            <meshStandardMaterial color={0xffffff} />
-        </mesh>
-}
+import LineRenderer from './LineRenderer';
+import './ExtendControls'
+import { OrbitControls } from '@react-three/drei';
 
 const Euclid:React.FC<EuclidProps>=({points,hull})=>{
-    return <group position={[-100,-100,0]}>
-        <mesh onPointerMove={(e)=>{console.log(e.movementX)}} position={[100,100,0]}>
-            <planeGeometry attach="geometry" args={[10,10,10,10]}/>
-            <meshStandardMaterial wireframe={true} />
+    const [dragging,setDragging]=useState(false);
+    const [control,setControl]=useState(false);
+    const plane=useRef(null);
+    const {camera, gl: { domElement } } = useThree()
+
+    useEffect(()=>{
+        if(plane.current)
+            setControl(true);
+    },[plane.current])
+
+    return <><group ref={plane} position={[-100,-100,0]}>
+        <mesh onPointerDown={(e)=>setDragging(true)} onPointerMove={(e)=>{console.log(e.movementX)}} position={[100,100,0]}>
+            <planeGeometry attach="geometry" args={[20,20,10,10]}/>
+            <meshStandardMaterial />
         </mesh>
-        <group position={[100,100,0]}>
-            <PointsRenderer pointData={[]} pointsData={[{index:'points',color:0xf0ff0f,data:points},{index:'hull',color:0xff0000,data:hull}]}/>
+        <group position={[100,100,0.1]}>
+            <LineRenderer lineData={[]} linesData={[{index:'hull',color:0xff0000,data:hull}]} />
+            <PointsRenderer pointData={[]} pointsData={[{index:'points',color:0xff0000,data:points},{index:'hull',color:0x00ff00,data:hull}]}/>
         </group>
     </group>
+    </>
 }
 
 export default Euclid;

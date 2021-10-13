@@ -1,5 +1,4 @@
-import {OrbitControls} from '@react-three/drei';
-import {Canvas} from '@react-three/fiber';
+import {Canvas,extend} from '@react-three/fiber';
 import React, {useState, useEffect, Suspense} from 'react'
 import {CustomCanvasProps} from '../../types/convexhull/app.types';
 import Euclid from './Euclid';
@@ -15,11 +14,9 @@ const CustomCanvas:React.FC<CustomCanvasProps>=({points,lines})=>{
 
     return <Canvas camera={{position:[0,0,10]}}
             className="w-full h-full">
-        <OrbitControls />
-        <ambientLight intensity={0.5}/>
+        <ambientLight intensity={1}/>
         <Suspense fallback={null}>
             <Euclid points={points} hull={points.slice(0,3)}/>
-            {/*<Plane />*/}
         </Suspense>
     </Canvas>
 }

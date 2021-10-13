@@ -1,3 +1,19 @@
+//Renderers
+type rawPoint=THREE.Vector2;
+type rawPoints=Array<THREE.Vector2>;
+type point={index:string,data:THREE.Vector2,color:number};
+type points={index:string,data:Array<THREE.Vector2>,color:number};
+
+export interface PointsRendererProps{
+    pointData:Array<point>,
+    pointsData:Array<points>
+}
+
+export interface LineRendererProps{
+    lineData?:Array<[THREE.Vector2,THREE.Vector2]>, //line segment
+    linesData:Array<points> //multple line segments
+}
+
 export interface AlgorithmDisplayProps{
     step:()=>void
 
@@ -5,11 +21,6 @@ export interface AlgorithmDisplayProps{
 
 export interface EuclidProps extends CustomCanvasProps{
     hull:Array<THREE.Vector2>
-}
-
-export interface LineRendererProps{
-    lineList:Array<[THREE.Vector2,THREE.Vector2]>,
-    lineColor:THREE.Color
 }
 
 export interface IStack<T>{
@@ -20,12 +31,17 @@ export interface IStack<T>{
 }
 
 export interface IGrahamScan{
-    stack:IStack<THREE.Vector2>,
-    points:Array<THREE.Vector2>,
-    hull:Array<THREE.Vector2>,
-    start:THREE.Vector2|undefined,
-    mid:THREE.Vector2|undefined,
-    end:THREE.Vector2|undefined,
+    display:{
+        points:points|undefined,
+        hull:points|undefined,
+        start:point|undefined,
+        mid:point|undefined,
+        end:point|undefined,
+    },
+    stack:IStack<rawPoint>,
+    findLowestY():rawPoint,
+    sortPoints():void,
+    validatePoint():boolean,
 }
 
 type line=[THREE.Vector2,THREE.Vector2]

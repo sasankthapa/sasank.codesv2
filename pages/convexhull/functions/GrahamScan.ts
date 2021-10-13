@@ -2,14 +2,16 @@ import {Vector2} from "three";
 import {Stack} from './Utils';
 import {IGrahamScan} from '../../../types/convexhull/app.types'
 
-export const findLowestY=(points:Array<THREE.Vector2>)=>{
+const findLowestY=(points:Array<THREE.Vector2>):THREE.Vector2=>{
     let lowest=Infinity;
+    let lowestPoint:THREE.Vector2|null=null;
     points.forEach((point)=>{
         if(point.y < lowest){
             lowest=point.y;
+            lowestPoint=point;
         }
     })
-    return lowest
+    return lowestPoint!==null?lowestPoint:new Vector2(-1,-1);
 }
 
 function findAngleX(x:THREE.Vector2,y:THREE.Vector2){
@@ -30,10 +32,22 @@ export const sortBasedOnAngle=(lowest:THREE.Vector2,arr:Array<THREE.Vector2>)=>{
 
 export class GrahamScan implements IGrahamScan{
     stack=new Stack<Vector2>();
-    points=[];
-    hull=[];
-    lowest=undefined;
-    start=undefined;
-    mid=undefined;
-    end=undefined;
+    display={
+        points:undefined,
+        hull:undefined,
+        lowest:undefined,
+        start:undefined,
+        mid:undefined,
+        end:undefined,
+    }
+    findLowestY=()=>{
+        if(this.display.points)
+            return findLowestY(this.display.points)
+        return new Vector2(-1,-1);
+    }
+    sortPoints(){
+    }
+    validatePoint(){
+        return false;
+    }
 }

@@ -8,6 +8,7 @@ const AlgorithmDisplay:React.FC<AlgorithmDisplayProps> = () => {
         </div>
         <h2 className="font-bold">Finding the convex hull of n points.</h2>
         <h4>Graham Scan Algorithm</h4>
+
         <pre>
         <code>
         {'>'}Find lowest Y coordinate.
