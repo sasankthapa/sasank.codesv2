@@ -12,7 +12,7 @@ const CustomCanvas:React.FC<CustomCanvasProps>=({points,lines})=>{
             className='w-full h-full'>
         <ambientLight intensity={1}/>
         <Suspense fallback={null}>
-            <Euclid points={points} hull={points.slice(0,3)}/>
+            <Euclid />
         </Suspense>
     </Canvas>
 }

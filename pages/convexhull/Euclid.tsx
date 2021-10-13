@@ -1,18 +1,16 @@
-import * as THREE from 'three';
-import {extend,ThreeEvent,useFrame,useStore,useThree} from '@react-three/fiber'
-import React, { useEffect, useRef, useState } from 'react'
+import {ThreeEvent} from '@react-three/fiber'
+import React, { useRef, useState } from 'react'
 import {EuclidProps} from '../../types/convexhull/app.types'
 import PointsRenderer from './Renderers/PointsRenderer';
 import LineRenderer from './Renderers/LineRenderer';
-import CustomCamera from './CustomCamera';
-import { Camera, Vector2, Vector3 } from 'three';
+import CustomCamera from './Camera/CustomCamera';
+import {  Vector2 } from 'three';
 
-const Euclid:React.FC<EuclidProps>=({points,hull})=>{
+const Euclid:React.FC<EuclidProps>=({})=>{
     const plane=useRef(null);
     const [cameraPos,setCameraPos]=useState(new Vector2(0,0));
     const [cameraZoom,setCameraZoom]=useState(10);
     const [drag,setDrag]=useState(false);
-    const [mouse,setMouse]=useState(new Vector2(0,0))
 
     const handleWheel=(e:ThreeEvent<WheelEvent>)=>{
         e.stopPropagation();
@@ -25,7 +23,6 @@ const Euclid:React.FC<EuclidProps>=({points,hull})=>{
 
     const dragStart=(e:ThreeEvent<PointerEvent>)=>{
         e.stopPropagation();
-        setMouse(new Vector2(e.spaceX,e.spaceY))
         setDrag(true)
     }
 
@@ -37,10 +34,7 @@ const Euclid:React.FC<EuclidProps>=({points,hull})=>{
 
     const dragMove=(e:ThreeEvent<PointerEvent>)=>{
         e.stopPropagation();
-        console.log(e.uv)
         if(drag && e.uv){
-            const mouseCoords=new Vector2(e.spaceX,e.spaceY)
-            const direction=mouseCoords.sub(mouse).normalize().multiplyScalar(5);
             setCameraPos(e.uv.clone().subScalar(0.5).multiplyScalar(5))
         }
     }
@@ -53,8 +47,10 @@ const Euclid:React.FC<EuclidProps>=({points,hull})=>{
             <meshStandardMaterial />
         </mesh>
         <group position={[100,100,0.1]}>
-            <LineRenderer lineData={[]} linesData={[{index:'hull',color:0xff0000,data:hull}]} />
-            <PointsRenderer pointData={[]} pointsData={[{index:'points',color:0xff0000,data:points},{index:'hull',color:0x00ff00,data:hull}]}/>
+            {//linesData!==null?<LineRenderer linesData={linesData} />:null}
+}
+            {//pointData!==null && pointsData!==null?<PointsRenderer pointData={pointData} pointsData={pointsData}/>:null}
+        }
         </group>
     </group>
     </>

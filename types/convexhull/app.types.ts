@@ -1,8 +1,11 @@
 //Renderers
 type rawPoint=THREE.Vector2;
 type rawPoints=Array<THREE.Vector2>;
-type point={index:string,data:THREE.Vector2,color:number};
-type points={index:string,data:Array<THREE.Vector2>,color:number};
+
+type bufferTypes='point'|'points'|'line';
+
+export type point={index?:number,type:bufferTypes,data?:rawPoint,color:number};
+export type points={index?:number,type:bufferTypes,data?:rawPoints,color:number};
 
 export interface PointsRendererProps{
     pointData:Array<point>,
@@ -10,17 +13,23 @@ export interface PointsRendererProps{
 }
 
 export interface LineRendererProps{
-    lineData?:Array<[THREE.Vector2,THREE.Vector2]>, //line segment
     linesData:Array<points> //multple line segments
 }
 
+type AddNullType<T> ={
+    [Property in keyof T]:T[Property]|null;
+}
+
+export interface ContextData extends AddNullType<PointsRendererProps>, AddNullType<LineRendererProps> {}
+
+export type GenerateContext = (context:ContextData,display:IGrahamScan['display']) => ContextData
+export type GenerateInitialContext = (display:IGrahamScan['display']) => ContextData
+
 export interface AlgorithmDisplayProps{
     step:()=>void
-
 }
 
 export interface EuclidProps extends CustomCanvasProps{
-    hull:Array<THREE.Vector2>
 }
 
 export interface IStack<T>{
@@ -32,11 +41,11 @@ export interface IStack<T>{
 
 export interface IGrahamScan{
     display:{
-        points:points|undefined,
-        hull:points|undefined,
-        start:point|undefined,
-        mid:point|undefined,
-        end:point|undefined,
+        points:points,
+        hull:points,
+        start:point,
+        mid:point,
+        end:point,
     },
     stack:IStack<rawPoint>,
     findLowestY():rawPoint,
@@ -44,13 +53,8 @@ export interface IGrahamScan{
     validatePoint():boolean,
 }
 
-type line=[THREE.Vector2,THREE.Vector2]
-
 export interface CustomCanvasProps{
-    points:Array<THREE.Vector2>,
-    lines?:Array<line>,
 }
-
 
 export interface State{
     step:boolean,
@@ -59,6 +63,7 @@ export interface State{
     clientSide:boolean,
     width:number,
     height:number
+    dataContextState:ContextData|null
 }
 
 export interface Props{

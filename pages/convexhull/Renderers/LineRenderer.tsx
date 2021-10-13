@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import React, {useMemo} from 'react'
-import {LineRendererProps} from '../../types/convexhull/app.types';
+import {LineRendererProps} from '../../../types/convexhull/app.types';
 
-const LineRenderer:React.FC<LineRendererProps>=({lineData,linesData})=>{
+const LineRenderer:React.FC<LineRendererProps>=({linesData})=>{
     const linesBuffers=useMemo(()=>{
         const expandPointsToLines=(points:Array<THREE.Vector2>)=>{
             const lineBufferPoints=[];

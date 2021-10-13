@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import React, { useMemo } from 'react'
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js';
-import {extend, useLoader} from '@react-three/fiber';
-import {PointsRendererProps} from '../../types/convexhull/app.types';
+import { useLoader} from '@react-three/fiber';
+import {PointsRendererProps} from '../../../types/convexhull/app.types';
 
 const PointsRenderer:React.FC<PointsRendererProps>=({pointData,pointsData})=>{
     const texture=useLoader(TextureLoader,'assets/circlesprite.png');
