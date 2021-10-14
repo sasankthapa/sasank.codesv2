@@ -21,7 +21,8 @@ const CustomCamera:React.FC<CustomCameraProps> = ({targetPosition,zoom}) => {
         if(camera.position.z!=zoom){
             z=(zoom-camera.position.z)/5;
         }
-            camera.position.add(new Vector3(toAdd.x,toAdd.y,z))
+        camera.position.add(new Vector3(toAdd.x,toAdd.y,z))
+        camera.lookAt(new Vector3(camera.position.x,camera.position.y,0))
     })
 
     return <>
