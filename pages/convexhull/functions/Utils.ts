@@ -17,7 +17,11 @@ function getRandInt(min:number, max:number) {
 export const genRandomPoints=(n:number,sparse:number)=>{
     const toReturn:Array<THREE.Vector2>=[];
     for(let i=0 ;i < n ;i++){
-        toReturn.push(new THREE.Vector2(getRandInt(-sparse, sparse),getRandInt(-sparse, sparse)))
+        const x=getRandInt(-sparse, sparse);
+        const ySparse=sparse-Math.abs(x);
+        console.log(x,ySparse)
+
+        toReturn.push(new THREE.Vector2(x,getRandInt(-ySparse, ySparse)))
     }
     return toReturn;
 }

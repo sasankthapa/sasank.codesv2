@@ -8,7 +8,6 @@ const PointsRenderer:React.FC<PointsRendererProps>=({pointData,pointsData})=>{
     const texture=useLoader(TextureLoader,'assets/circlesprite.png');
 
     const pointBuffers=useMemo(()=>{
-        console.log('tehu')
         return pointData.map((point)=>{
             return new THREE.BufferGeometry().setFromPoints(point.data?[point.data]:[])
         })
@@ -28,7 +27,7 @@ const PointsRenderer:React.FC<PointsRendererProps>=({pointData,pointsData})=>{
         })}
         {pointData?.map((point,index)=>{
             return <points key={'points'+index} geometry={pointBuffers[index]}>
-                <pointsMaterial attach="material" map={texture} color={point.color}/>
+                <pointsMaterial transparent={true} attach="material" map={texture} color={point.color}/>
             </points>
         })}
     </group>

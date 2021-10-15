@@ -5,11 +5,16 @@ import {FaGithub, FaLinkedin} from 'react-icons/fa'
 import {TiDocumentText} from 'react-icons/ti'
 import Image from 'next/image'
 import profileImage from '../public/static/images/profile.jpg'
-import GLRenderer from './GLRenderer';
+import dynamic from 'next/dynamic';
+
+const DynamicRenderer=dynamic(
+    ()=> import('./GLRenderer'),
+    {ssr:false}
+)
 
 const MainContainer:React.FC<{}>=()=>{
     return <>
-        <GLRenderer />
+        <DynamicRenderer />
         <div className="absolute flex box-content items-center justify-center w-screen h-screen pointer-events-none">
             <Transition
               as={Fragment}
@@ -26,12 +31,16 @@ const MainContainer:React.FC<{}>=()=>{
                     <h1 className="relative mb-5 text-3xl text-center border-b-2 border-black lg:text-3xl">
                         Sashank Thapa
                     </h1>
-                    <button className="w-full p-2 mb-3 rounded-lg cursor-pointer hover:bg-green-400 transition-colors shadow-sm bg-blue-50">
-                        <Link href="me"><a>/work</a></Link>
-                    </button>
-                    <button className="w-full p-2 mb-3 rounded-lg cursor-pointer hover:bg-green-400 transition-colors shadow-sm bg-blue-50">
-                        <Link href="convexhull"><a>/convexhull</a></Link>
-                    </button>
+                    <Link href="me">
+                        <button className="w-full p-2 mb-3 rounded-lg cursor-pointer hover:bg-green-400 transition-colors shadow-sm bg-blue-50">
+                            <a>/me</a>
+                        </button>
+                    </Link>   
+                    <Link href="convexhull">    
+                        <button className="w-full p-2 mb-3 rounded-lg cursor-pointer hover:bg-green-400 transition-colors shadow-sm bg-blue-50">
+                            <a>/convexhull</a>
+                        </button>
+                    </Link>   
                     <div className="flex flex-row items-center justify-center w-full mt-2 gap-10 md:gap-3">
                         <Link href="https://sasank.codes/assets/resume.pdf"><a target="_blank" rel="noreferrer"><TiDocumentText className="m-1 text-xl lg:text-2xl"/></a></Link>
                         <Link href="https://github.com/sasankthapa"><a target="_blank" rel="noreferrer"><FaGithub className="m-1 text-xl lg:text-2xl"/></a></Link>

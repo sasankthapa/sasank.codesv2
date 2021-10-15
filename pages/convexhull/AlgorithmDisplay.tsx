@@ -1,12 +1,12 @@
 import React from 'react'
-import { AlgorithmDisplayProps } from '../../types/convexhull/app.types'
+import { AlgorithmDisplayProps } from '../../types/convexhull/grahamscan.types'
 
 const AlgorithmDisplay: React.FC<AlgorithmDisplayProps> = ({ pointsNum, setPointsNum,  render, steps, currStep, currPlaneSize, sparseRadius, setPlaneSize, setSparseRadius, step, play, pause }) => {
-
     return <div className="flex flex-col h-full p-2 text-white bg-blue-500 md:w-3/5">
-        <div className="block group">
-            <h1 className="font-bold">Motivation</h1>
-            <p className="group-hover:block transition-all">
+        <div className="block transition-all group">
+            <h1 className="font-bold group-hover:text-gray-900">Motivation</h1>
+            <p className="h-0 group-hover:h-auto transition-all">
+                hello
             </p>
         </div>
         <div className="flex w-full items-center gap-1 py-2 bg-blue-500 my-1 border-t-2">

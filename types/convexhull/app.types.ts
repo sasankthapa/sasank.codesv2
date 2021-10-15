@@ -33,13 +33,6 @@ export interface IStack<T>{
     size():number
 }
 
-export type Step={
-    index?:number,
-    info:string, // <pre> string
-    psuedo:string,
-    fn:()=>boolean,
-}
-
 export interface BaseAlgorithm{
     name:string,
     display:{
@@ -48,21 +41,16 @@ export interface BaseAlgorithm{
     instance:{
         [key:string]:any
     },
-    steps:Array<Step>
 }
 
 export interface BaseState<T extends BaseAlgorithm>{
     play:boolean,
     step:number,
-    points:number,
-    name:T['name'],
-    display:T['display'],
-    instance:T['instance'],
-    steps:T['steps'],
+    pointsNum:number,
+    instance:T,
     needsUpdate:boolean,
     sparseRadius:number,
     planeSize:number,
-    render:RenderData
 }
 
 export interface CustomCanvasProps{
@@ -70,18 +58,4 @@ export interface CustomCanvasProps{
     data:RenderData;
 }
 
-export interface AlgorithmDisplayProps{
-    steps:Array<Step>,
-    currStep:number,
-    currPlaneSize:number,
-    sparseRadius:number,
-    pointsNum:number,
-    setPlaneSize:(size:number)=>void;
-    setSparseRadius:(rad:number)=>void;
-    setPointsNum:(num:number)=>void;
-    step:()=>void;
-    play:()=>void;
-    pause:()=>void;
-    render:()=>void;
-}
 

@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import React, {useRef,useEffect} from 'react';
 import {MeshProps, ShaderMaterialProps, useFrame} from '@react-three/fiber';
-import '../shaders/BackgroundShader';
 
 const BackgroundShader:React.FC<ShaderMaterialProps> = (props) => {
     return <shaderMaterial 

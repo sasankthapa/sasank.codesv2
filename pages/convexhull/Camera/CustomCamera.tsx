@@ -1,5 +1,5 @@
 import { useFrame, useThree } from '@react-three/fiber';
-import React, {useState} from 'react'
+import React  from 'react'
 import { Vector2, Vector3 } from 'three';
 
 interface CustomCameraProps{
@@ -8,7 +8,6 @@ interface CustomCameraProps{
 }
 
 const CustomCamera:React.FC<CustomCameraProps> = ({targetPosition,zoom}) => {
-    const [position,setPosition]=useState(new Vector2())
     const {camera}=useThree()
     
     useFrame(()=>{

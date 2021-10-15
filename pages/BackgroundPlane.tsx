@@ -27,19 +27,19 @@ const BackgroundShader:React.FC<ShaderMaterialProps> = (props) => {
                 uniform float u_time;
                 void main(){
                     vec2 st=gl_FragCoord.xy/u_resolution;
-                    gl_FragColor=vec4(vec3(1.0,1.0,u_mouse.x),0.8);
+                    gl_FragColor=vec4(vec3(abs(sin(u_time*2.0)),0,0.8),0.8);
                 }
                 `
             }
         /> 
 }
 
-const Background:React.FC<MeshProps>=(props)=>{
+const Background:React.FC<{z:number}>=({z})=>{
     const ref=useRef<THREE.Mesh>(null);
     const camera=useThree(state=>state.camera as THREE.PerspectiveCamera);
 
     const ang_rad=camera.fov * Math.PI / 180;
-    const fov_y=camera.position.z * Math.tan(ang_rad/2)*2;
+    const fov_y=(camera.position.z+z) * Math.tan(ang_rad/2)*2;
 
     useFrame(({clock,mouse},_)=>{
         if(ref.current){
@@ -47,7 +47,6 @@ const Background:React.FC<MeshProps>=(props)=>{
             material.uniforms.u_time={value:clock.getElapsedTime()};
             let mouseX=(mouse.x+1.0)/2.0;
             let mouseY=(mouse.y+1.0)/2.0;
-            console.log(mouseX,mouseY);
             material.uniforms.u_mouse={value:new THREE.Vector2(mouseX,mouseY)};
             material.needsUpdate=true;
         }
@@ -55,12 +54,13 @@ const Background:React.FC<MeshProps>=(props)=>{
 
     useEffect(()=>{
         if(ref.current){
+            //update position
             let material=ref.current.material as THREE.ShaderMaterial
             material.uniforms.u_resolution={value:new THREE.Vector2(window.innerWidth,window.innerHeight)};
         }
     },[])
 
-    return <mesh ref={ref} {...props}>
+    return <mesh ref={ref} position={[0,0,-z]}>
         <planeGeometry attach="geometry" args={[fov_y*camera.aspect,fov_y,10,10]}/>
         <BackgroundShader attach="material"/>
     </mesh>

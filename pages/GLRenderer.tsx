@@ -5,11 +5,7 @@ import BackgroundPlane from './BackgroundPlane';
 const GLRenderer = () => {
     return <div className="z-0 w-screen h-screen absolute top-0 left-0">
         <Canvas className="w-full h-full">
-                <mesh position={[0,0,0]}>
-                    <boxGeometry attach="geometry" />
-                    <meshNormalMaterial />
-                </mesh>
-                <BackgroundPlane />
+                <BackgroundPlane z={10}/>
         </Canvas>
     </div>
 }

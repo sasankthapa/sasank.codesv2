@@ -1,25 +1,52 @@
-import {BaseAlgorithm, BaseState, IStack, point, points, RenderData, Step} from './app.types'
+import {BaseAlgorithm, BaseState, IStack, point, points } from './app.types'
 
-export interface grahamFunctions{ //Functions to run for
+type stepReturn<T>={
+    next:boolean,
+    instance?:T
+}
+
+export type Step<T extends BaseAlgorithm>={
+    index?:number,
+    info:string, 
+    psuedo:string,// <pre> string
+    fn:(instance:T)=>stepReturn<T>, // returns whether we go to next step or not
 }
 
 export interface IGrahamScan extends BaseAlgorithm{
     display:{
         points:points,
         hull:points,
+        hull2:points,
+        lowest:point,
         start:point,
         mid:point,
         end:point,
     },
-    steps:Array<Step>,
     instance:{
         array:Array<THREE.Vector2>,
         stack:IStack<THREE.Vector2>,
-    }
-    findLowestY():THREE.Vector2,
-    sortPoints():Array<THREE.Vector2>,
-    validatePoints():boolean,
-    getRender():RenderData
+    },
+}
+
+export interface GrahamScanClass extends IGrahamScan{
+    steps:Array<Step<IGrahamScan>>
+}
+
+// --TODO-- 
+// implement redux stores to handle this mess and the UI
+export interface AlgorithmDisplayProps{
+    steps:Array<Step<any>>,
+    currStep:number,
+    currPlaneSize:number,
+    sparseRadius:number,
+    pointsNum:number,
+    setPlaneSize:(size:number)=>void;
+    setSparseRadius:(rad:number)=>void;
+    setPointsNum:(num:number)=>void;
+    step:()=>void;
+    play:()=>void;
+    pause:()=>void;
+    render:()=>void;
 }
 
 export interface GrahamScanApp extends BaseState<IGrahamScan>{
