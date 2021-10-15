@@ -11,6 +11,7 @@ const Euclid:React.FC<EuclidProps>=({pointData,pointsData,linesData,planeArgs})=
     const [cameraPos,setCameraPos]=useState(new Vector2(0,0));
     const [cameraZoom,setCameraZoom]=useState(50);
     const [drag,setDrag]=useState(false);
+    const [mouseUV,setMouseUV]=useState(new Vector2(0,0))
 
     const handleWheel=(e:ThreeEvent<WheelEvent>)=>{
         e.stopPropagation();
@@ -24,23 +25,25 @@ const Euclid:React.FC<EuclidProps>=({pointData,pointsData,linesData,planeArgs})=
     const dragStart=(e:ThreeEvent<PointerEvent>)=>{
         e.stopPropagation();
         setDrag(true)
+        setMouseUV(new Vector2(e.point.x,e.point.y))
     }
 
     const dragEnd=(e:ThreeEvent<PointerEvent>)=>{
         e.stopPropagation();
+        console.log(e.uv)
         setDrag(false)
-        setCameraPos(prev=>prev.set(e.camera.position.x,e.camera.position.y))
+        //setCameraPos(prev=>prev.set(e.camera.position.x,e.camera.position.y))
     }
 
     const dragMove=(e:ThreeEvent<PointerEvent>)=>{
         e.stopPropagation();
-        if(drag && e.uv){
-            setCameraPos(e.uv.clone().subScalar(0.5).multiplyScalar(5))
+        if(drag){
+            setMouseUV(new Vector2(e.point.x,e.point.y))
         }
     }
 
     return <>
-        <CustomCamera targetPosition={cameraPos} zoom={cameraZoom}/>
+        <CustomCamera mouseUV={mouseUV} targetPosition={cameraPos} zoom={cameraZoom}/>
         <group position={[-100,-100,0]}>
         <mesh ref={plane} onWheel={handleWheel} onPointerLeave={()=>setDrag(false)} onPointerMove={dragMove} onPointerDown={dragStart} onPointerUp={dragEnd} position={[100,100,0]}>
             <planeGeometry attach="geometry" args={planeArgs}/>

@@ -1,7 +1,7 @@
 import {Vector2} from "three";
 import {Stack} from './Utils';
-import { point, points, RenderData} from '../../../types/convexhull/app.types'
-import { GrahamScanClass, IGrahamScan, Step } from "../../../types/convexhull/grahamscan.types";
+import { point, points, RenderData} from '../types/convexhull/app.types'
+import { GrahamScanClass, IGrahamScan, Step } from "../types/convexhull/grahamscan.types";
 
 const findLowestYInArray=(points:Array<THREE.Vector2>):THREE.Vector2=>{
     let lowestY=Infinity;
@@ -40,7 +40,7 @@ const sortBasedOnAngle=(lowest:THREE.Vector2,arr:Array<THREE.Vector2>)=>{
 
 export class GrahamScan implements GrahamScanClass{
     name='GrahamScan';
-    instance={
+    instance:IGrahamScan['instance']={
         array:[],
         stack:new Stack<THREE.Vector2>()
     }

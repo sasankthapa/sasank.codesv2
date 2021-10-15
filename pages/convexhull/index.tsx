@@ -1,11 +1,18 @@
-import React from 'react'
-import {GrahamScan}  from './functions/GrahamScan'
-import GrahamScanApp from './GrahamScanApp'
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import GrahamScanApp from '../../components/convexhull/GrahamScanApp'
 
-const App = () => {
-    return <>
-        <GrahamScanApp instance={new GrahamScan()}/>
-    </>
+const Home: NextPage<{}> = () => {
+  return (
+    <div>
+      <Head>
+        <title>Sasank Thapa</title>
+        <meta name="Sasank Thapa Portfolio Links" content="Links" />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+      <GrahamScanApp />
+    </div>
+  )
 }
 
-export default App;
+export default Home

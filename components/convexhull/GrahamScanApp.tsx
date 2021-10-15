@@ -2,17 +2,14 @@ import React  from "react";
 import { point, points, RenderData } from '../../types/convexhull/app.types'
 import AlgorithmDisplay from "./AlgorithmDisplay";
 import dynamic from 'next/dynamic'
-import { GrahamScanApp, GrahamScanProps } from "../../types/convexhull/grahamscan.types";
-import { genRandomPoints } from "./functions/Utils";
-import { GrahamScan } from "./functions/GrahamScan";
+import { GrahamScanApp as State, GrahamScanProps as Props} from "../../types/convexhull/grahamscan.types";
+import { genRandomPoints } from "../../lib/Utils";
+import { GrahamScan } from "../../lib/GrahamScan";
 
-const DynamicCanvas=dynamic(
-    ()=>import('./CustomCanvas'),
-    {ssr:false}
-)
+const DynamicCanvas=dynamic(import('./CustomCanvas'),{ssr:false})
 
-export default class App extends React.Component<GrahamScanProps,GrahamScanApp>{
-    constructor(props:GrahamScanProps){
+export default class App extends React.Component<Props,State>{
+    constructor(props:State){
         super(props);
         this.state={
             play:false,

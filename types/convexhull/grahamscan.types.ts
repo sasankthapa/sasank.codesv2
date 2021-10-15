@@ -49,9 +49,8 @@ export interface AlgorithmDisplayProps{
     render:()=>void;
 }
 
-export interface GrahamScanApp extends BaseState<IGrahamScan>{
+export interface GrahamScanApp extends BaseState<GrahamScanClass>{
 }
 
 export interface GrahamScanProps{
-    instance:IGrahamScan
 }

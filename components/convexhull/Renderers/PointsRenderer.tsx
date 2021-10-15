@@ -1,11 +1,11 @@
 import * as THREE from 'three';
 import React, { useMemo } from 'react'
-import { TextureLoader } from 'three/src/loaders/TextureLoader.js';
 import { useLoader} from '@react-three/fiber';
 import {PointsRendererProps} from '../../../types/convexhull/app.types';
+import {TextureLoader } from 'three/src/loaders/TextureLoader'
 
 const PointsRenderer:React.FC<PointsRendererProps>=({pointData,pointsData})=>{
-    const texture=useLoader(TextureLoader,'assets/circlesprite.png');
+    const texture=useLoader(TextureLoader,'assets/circlesprite.png')
 
     const pointBuffers=useMemo(()=>{
         return pointData.map((point)=>{
@@ -22,12 +22,12 @@ const PointsRenderer:React.FC<PointsRendererProps>=({pointData,pointsData})=>{
     return <group>
         {pointsData?.map((point,index)=>{
             return <points key={'point'+index} geometry={pointsBuffers[index]}>
-                <pointsMaterial transparent={true} opacity={1} attach="material" map={texture} color={point.color}/>
+                <pointsMaterial transparent={true} map={texture} attach="material" color={point.color}/>
             </points>
         })}
         {pointData?.map((point,index)=>{
             return <points key={'points'+index} geometry={pointBuffers[index]}>
-                <pointsMaterial transparent={true} attach="material" map={texture} color={point.color}/>
+                <pointsMaterial transparent={true} map={texture} attach="material" color={point.color}/>
             </points>
         })}
     </group>

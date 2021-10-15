@@ -31,12 +31,12 @@ const MainContainer:React.FC<{}>=()=>{
                     <h1 className="relative mb-5 text-3xl text-center border-b-2 border-black lg:text-3xl">
                         Sashank Thapa
                     </h1>
-                    <Link href="me">
+                    <Link href="/me" passHref>
                         <button className="w-full p-2 mb-3 rounded-lg cursor-pointer hover:bg-green-400 transition-colors shadow-sm bg-blue-50">
                             <a>/me</a>
                         </button>
                     </Link>   
-                    <Link href="convexhull">    
+                    <Link href="/convexhull" passHref>    
                         <button className="w-full p-2 mb-3 rounded-lg cursor-pointer hover:bg-green-400 transition-colors shadow-sm bg-blue-50">
                             <a>/convexhull</a>
                         </button>

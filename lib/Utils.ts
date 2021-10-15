@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {IStack} from '../../../types/convexhull/app.types';
+import {IStack} from '../types/convexhull/app.types';
 
 export const sortLowestY=(points:Array<THREE.Vector2>)=>{
     const toReturn=new THREE.Vector2();

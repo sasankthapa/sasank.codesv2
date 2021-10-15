@@ -2,7 +2,7 @@ import { useFrame } from '@react-three/fiber';
 import React, {useRef} from 'react';
 import {Mesh} from 'three';
 
-const Loading=()=>{
+const Loading:React.FC<{}>=()=>{
     const ref=useRef<Mesh>(null)
 
     useFrame(()=>{
