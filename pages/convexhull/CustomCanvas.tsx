@@ -9,8 +9,8 @@ const Loading=()=>{
 
     useFrame(()=>{
         if(ref.current){
-            ref.current.rotation.x+=2;
-            ref.current.rotation.z+=2;
+            ref.current.rotation.x+=.2;
+            ref.current.rotation.z+=.2;
         }
     })
 

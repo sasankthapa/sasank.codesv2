@@ -33,7 +33,7 @@ export interface IStack<T>{
     size():number
 }
 
-type Step={
+export type Step={
     index?:number,
     info:string, // <pre> string
     psuedo:string,
@@ -45,23 +45,24 @@ export interface BaseAlgorithm{
     display:{
         [key:string]:point|points
     },
+    instance:{
+        [key:string]:any
+    },
     steps:Array<Step>
 }
 
-export interface IGrahamScan extends BaseAlgorithm{
-    display:{
-        points:points,
-        hull:points,
-        start:point,
-        mid:point,
-        end:point,
-    },
-    array:Array<THREE.Vector2>,
-    stack:IStack<THREE.Vector2>,
-    findLowestY():boolean,
-    sortPoints():boolean,
-    validatePoint():boolean,
-    getRender():RenderData
+export interface BaseState<T extends BaseAlgorithm>{
+    play:boolean,
+    step:number,
+    points:number,
+    name:T['name'],
+    display:T['display'],
+    instance:T['instance'],
+    steps:T['steps'],
+    needsUpdate:boolean,
+    sparseRadius:number,
+    planeSize:number,
+    render:RenderData
 }
 
 export interface CustomCanvasProps{
@@ -74,24 +75,13 @@ export interface AlgorithmDisplayProps{
     currStep:number,
     currPlaneSize:number,
     sparseRadius:number,
+    pointsNum:number,
     setPlaneSize:(size:number)=>void;
     setSparseRadius:(rad:number)=>void;
+    setPointsNum:(num:number)=>void;
     step:()=>void;
     play:()=>void;
     pause:()=>void;
+    render:()=>void;
 }
 
-export interface State{
-    pause:boolean,
-    play:boolean,
-    next:boolean,
-    step:number,
-    needsUpdate:boolean,
-    grahamScan:IGrahamScan,
-    sparseRadius:number,
-    planeSize:number,
-    render:RenderData
-}
-
-export interface Props{
-}

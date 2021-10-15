@@ -41,7 +41,7 @@ const Background:React.FC<MeshProps>=(props)=>{
     const ang_rad=camera.fov * Math.PI / 180;
     const fov_y=camera.position.z * Math.tan(ang_rad/2)*2;
 
-    useFrame(({clock,mouse},delta)=>{
+    useFrame(({clock,mouse},_)=>{
         if(ref.current){
             let material=ref.current.material as THREE.ShaderMaterial
             material.uniforms.u_time={value:clock.getElapsedTime()};

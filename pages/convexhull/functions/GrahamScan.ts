@@ -1,6 +1,7 @@
 import {Vector2} from "three";
 import {Stack} from './Utils';
-import {IGrahamScan, point, points, RenderData} from '../../../types/convexhull/app.types'
+import { point, points, RenderData, Step} from '../../../types/convexhull/app.types'
+import { IGrahamScan } from "../../../types/convexhull/grahamscan.types";
 
 const findLowestYInArray=(points:Array<THREE.Vector2>):THREE.Vector2=>{
     let lowest=Infinity;
@@ -32,7 +33,10 @@ export const sortBasedOnAngle=(lowest:THREE.Vector2,arr:Array<THREE.Vector2>)=>{
 
 export class GrahamScan implements IGrahamScan{
     name='GrahamScan';
-    array=[];
+    instance={
+        array:[],
+        stack:new Stack<THREE.Vector2>()
+    }
     stack=new Stack<Vector2>();
     display={
         points:{type:'points',color:0xff00ff} as points,
@@ -62,22 +66,18 @@ export class GrahamScan implements IGrahamScan{
     }
     findLowestY=()=>{
         if(this.display.points){
-            this.display.lowest.data=findLowestYInArray(this.display.points.data||[])
-            return true;
+            return findLowestYInArray(this.display.points.data||[])
         }
-        return false;
+        return new Vector2(-1,-1);
     }
     sortPoints(){
-        return true;
+        return [];
     }
-    validatePoint(){
+    validatePoints(){
         return false;
     }
-    runLoop(){
-        return false;
-    }
-    steps=[{info:"first step",fn:this.findLowestY,psuedo:'findLowestY()'},
-        {info:"first step",fn:this.sortPoints,psuedo:'Sort Points()'},
-        {info:"first step",fn:this.runLoop,psuedo:'while i<S.length:\n\tdo the things'},
+    steps=[{info:"first step",fn:()=>{},psuedo:'findLowestY()'} as Step,
+        {info:"first step",fn:()=>{},psuedo:'Sort Points()'} as Step,
+        {info:"first step",fn:()=>{},psuedo:'while i<S.length:\n\tdo the things'} as Step,
     ];
 }
