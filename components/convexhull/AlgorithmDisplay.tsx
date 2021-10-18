@@ -27,7 +27,7 @@ const AlgorithmDisplay: React.FC<AlgorithmDisplayProps> = ({ pointsNum, setPoint
             </button>
         </div>
         <pre className="bg-blue-300">
-            <code className="text-black">
+            <code className="text-black w-full">
                 {steps.map((step,index)=>`${index===currStep?'>|':'  '}${step.psuedo}\n`)}
             </code>
         </pre>

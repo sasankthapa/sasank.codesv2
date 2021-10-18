@@ -8,7 +8,7 @@ import profileImage from '../public/static/images/profile.jpg'
 import dynamic from 'next/dynamic';
 
 const DynamicRenderer=dynamic(
-    ()=> import('./GLRenderer'),
+    ()=> import('../components/GLRenderer'),
     {ssr:false}
 )
 

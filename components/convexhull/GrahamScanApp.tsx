@@ -2,7 +2,7 @@ import React  from "react";
 import { point, points, RenderData } from '../../types/convexhull/app.types'
 import AlgorithmDisplay from "./AlgorithmDisplay";
 import dynamic from 'next/dynamic'
-import { GrahamScanApp as State, GrahamScanProps as Props} from "../../types/convexhull/grahamscan.types";
+import { GrahamScanApp as State, GrahamScanClass, GrahamScanProps as Props, IGrahamScan} from "../../types/convexhull/grahamscan.types";
 import { genRandomPoints } from "../../lib/Utils";
 import { GrahamScan } from "../../lib/GrahamScan";
 
@@ -27,36 +27,29 @@ export default class App extends React.Component<Props,State>{
     }
 
     renderData=()=>{
-        this.setState((prev)=>{
-            const instance=new GrahamScan()
-            const list=genRandomPoints(prev.pointsNum,prev.sparseRadius);
-            instance.display.points.data=list;
-            instance.instance.array=list;
-            return {...prev,instance};
-        })
+        const instance=new GrahamScan()
+        const list=genRandomPoints(this.state.pointsNum,this.state.sparseRadius);
+        instance.display.points.data=list;
+        instance.str.array=list;
+        this.setState({instance})
+    }
+
+    handleStep(){
+        const toReturn={...this.state};
+        const {next,instance=null}=this.state.instance.steps[this.state.step].fn(this.state.instance)
+        if(next){
+            toReturn.step=toReturn.step+1;
+        }
+        if(instance!==null){
+            const {display,str}=instance;
+            const instance2={...this.state.instance,display,str};
+            this.setState({instance:instance2})
+        }
+        this.setState(toReturn)
     }
 
     render(){
-        const getRenderDataFromInstance=()=>{
-            const toReturn:RenderData={pointData:[],pointsData:[],linesData:[]}
-            for(const [k,v] of Object.entries(this.state.instance.display)){
-                if(v.data){
-                    if(v.type==='point'){
-                    console.log(k)
-                            toReturn.pointData?.push(v as point);
-                        }else if(v.type==='points'){
-                            console.log(k)
-                            toReturn.pointsData?.push(v as points);
-                        }else if(v.type==='line'){
-                            console.log(k)
-                            toReturn.linesData?.push(v as points);
-                        }
-                    }
-                }
-            return toReturn;
-        }
-
-        const renderdata=getRenderDataFromInstance();
+        const renderdata=this.state.instance.getRender(this.state.instance);
 
         return <div className="flex flex-col w-screen h-screen md:flex-row">
             <DynamicCanvas data={renderdata} planeArgs={[this.state.planeSize,this.state.planeSize,10,10]}/>
@@ -69,12 +62,7 @@ export default class App extends React.Component<Props,State>{
                 setPlaneSize={(size:number)=>this.setState({planeSize:size})} 
                 setSparseRadius={(rad:number)=>this.setState({sparseRadius:rad})}
                 setPointsNum={(num:number)=>this.setState({pointsNum:num})}
-                step={()=>this.setState((prev)=>{
-                    const {next,instance=null}=prev.instance.steps[prev.step].fn(prev.instance)
-                    if(next && instance!==null)
-                        return {...prev,instance,step:prev.step+1}
-                    return {}
-                })}
+                step={this.handleStep.bind(this)}
                 play={()=>this.setState({play:true})}
                 pause={()=>this.setState({play:false})}
                 render={()=>this.renderData()}

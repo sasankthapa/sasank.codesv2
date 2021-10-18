@@ -22,12 +22,12 @@ const PointsRenderer:React.FC<PointsRendererProps>=({pointData,pointsData})=>{
     return <group>
         {pointsData?.map((point,index)=>{
             return <points key={'point'+index} geometry={pointsBuffers[index]}>
-                <pointsMaterial transparent={true} map={texture} attach="material" color={point.color}/>
+                <pointsMaterial size={point.size} transparent={true} map={texture} attach="material" color={point.color}/>
             </points>
         })}
         {pointData?.map((point,index)=>{
             return <points key={'points'+index} geometry={pointBuffers[index]}>
-                <pointsMaterial transparent={true} map={texture} attach="material" color={point.color}/>
+                <pointsMaterial size={point.size} transparent={true} map={texture} attach="material" color={point.color}/>
             </points>
         })}
     </group>

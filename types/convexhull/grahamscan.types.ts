@@ -1,4 +1,4 @@
-import {BaseAlgorithm, BaseState, IStack, point, points } from './app.types'
+import {BaseAlgorithm, BaseState, IStack, point, points, RenderData } from './app.types'
 
 type stepReturn<T>={
     next:boolean,
@@ -9,9 +9,10 @@ export type Step<T extends BaseAlgorithm>={
     index?:number,
     info:string, 
     psuedo:string,// <pre> string
-    fn:(instance:T)=>stepReturn<T>, // returns whether we go to next step or not
+    fn:(instance:T, fast?:boolean)=>stepReturn<T>, // returns whether we go to next step or not
 }
 
+// For better type inference
 export interface IGrahamScan extends BaseAlgorithm{
     display:{
         points:points,
@@ -21,8 +22,10 @@ export interface IGrahamScan extends BaseAlgorithm{
         start:point,
         mid:point,
         end:point,
+        testingLine:points
     },
-    instance:{
+    str:{
+        i:number,
         array:Array<THREE.Vector2>,
         stack:IStack<THREE.Vector2>,
     },
@@ -30,6 +33,7 @@ export interface IGrahamScan extends BaseAlgorithm{
 
 export interface GrahamScanClass extends IGrahamScan{
     steps:Array<Step<IGrahamScan>>
+    getRender(instance:IGrahamScan):RenderData
 }
 
 // --TODO-- 

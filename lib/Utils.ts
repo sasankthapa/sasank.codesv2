@@ -1,33 +1,46 @@
 import * as THREE from 'three';
 import {IStack} from '../types/convexhull/app.types';
 
-export const sortLowestY=(points:Array<THREE.Vector2>)=>{
-    const toReturn=new THREE.Vector2();
-    points.forEach((point)=>{
-        if(point.y <= toReturn.y && point.x < toReturn.x){
-             
-        }
-    })
-}
-
 function getRandInt(min:number, max:number) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+function getRandF(min:number, max:number) {
+    return Math.random() * (max - min) + min;
+}
+
 export const genRandomPoints=(n:number,sparse:number)=>{
     const toReturn:Array<THREE.Vector2>=[];
+    const map=new Map<number,Set<number>>();
     for(let i=0 ;i < n ;i++){
         const x=getRandInt(-sparse, sparse);
+        //calucate y based on x
         const ySparse=sparse-Math.abs(x);
-        console.log(x,ySparse)
-
-        toReturn.push(new THREE.Vector2(x,getRandInt(-ySparse, ySparse)))
+        const y=getRandInt(-ySparse, ySparse)
+        if(map.has(x)){
+            if(map.get(x)?.has(y)){
+                i--;
+            }else{
+                toReturn.push(new THREE.Vector2(x,y))
+                map.get(x)?.add(y)
+            }
+        }else{
+            toReturn.push(new THREE.Vector2(x,y))
+            const set=new Set<number>();
+            set.add(y)
+            map.set(x,set)
+        }
     }
+    console.log(toReturn)
     return toReturn;
 }
 
 export class Stack<T> implements IStack<T>{
     private storage:Array<T>=[];
+
+    getLast(n:number){
+        return this.storage.splice(n)
+    }
     
     push(item:T){
         this.storage.push(item)

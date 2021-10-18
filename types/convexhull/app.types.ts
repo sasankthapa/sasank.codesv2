@@ -4,8 +4,8 @@ type rawPoints=Array<THREE.Vector2>;
 
 type bufferTypes='point'|'points'|'line';
 
-export type point={index?:number,type:bufferTypes,data:rawPoint,color:number};
-export type points={index?:number,type:bufferTypes,data:rawPoints,color:number};
+export type point={index?:number,size:number,type:bufferTypes,data:rawPoint,color:number};
+export type points={index?:number,size:number,type:bufferTypes,data:rawPoints,color:number};
 
 export interface PointsRendererProps{
     pointData:Array<point>,
@@ -30,7 +30,8 @@ export interface IStack<T>{
     push(item:T):void,
     pop():T|undefined,
     peek():T|undefined,
-    size():number
+    size():number,
+    getLast(last:number):Array<T>
 }
 
 export interface BaseAlgorithm{
@@ -38,7 +39,7 @@ export interface BaseAlgorithm{
     display:{
         [key:string]:point|points
     },
-    instance:{
+    str:{
         [key:string]:any
     },
 }
