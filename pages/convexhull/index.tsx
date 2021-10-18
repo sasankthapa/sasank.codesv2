@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import GrahamScanApp from '../../components/convexhull/GrahamScanApp'
+import App from '../../components/convexhull/GrahamScanApp'
+import { GrahamScan } from '../../lib/GrahamScan'
 
 const Home: NextPage<{}> = () => {
   return (
@@ -10,7 +11,8 @@ const Home: NextPage<{}> = () => {
         <meta name="Sasank Thapa Portfolio Links" content="Links" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <GrahamScanApp />
+
+      <App instance={new GrahamScan()} />
     </div>
   )
 }

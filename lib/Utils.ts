@@ -14,10 +14,10 @@ export const genRandomPoints=(n:number,sparse:number)=>{
     // We use a map to store the points to prevent duplicates
     const map=new Map<number,Set<number>>();
     for(let i=0 ;i < n ;i++){
-        const x=getRandInt(-sparse, sparse);
+        const x=getRandF(-sparse, sparse);
         //calucate y based on x
         const ySparse=sparse-Math.abs(x);
-        const y=getRandInt(-ySparse, ySparse)
+        const y=getRandF(-ySparse, ySparse)
         if(map.has(x)){
             if(map.get(x)?.has(y)){
                 i--;

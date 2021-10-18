@@ -1,22 +1,21 @@
 import React  from "react";
-import { point, points, RenderData } from '../../types/convexhull/app.types'
 import AlgorithmDisplay from "./AlgorithmDisplay";
 import dynamic from 'next/dynamic'
-import { GrahamScanApp as State, GrahamScanClass, GrahamScanProps as Props, IGrahamScan} from "../../types/convexhull/grahamscan.types";
 import { genRandomPoints } from "../../lib/Utils";
 import { GrahamScan } from "../../lib/GrahamScan";
+import { BaseState,BaseProps } from "../../types/convexhull/app.types";
+import { IGrahamScan } from "../../types/convexhull/grahamscan.types";
 
 const DynamicCanvas=dynamic(import('./CustomCanvas'),{ssr:false})
 
-export default class App extends React.Component<Props,State>{
-    constructor(props:State){
+export default class App extends React.Component<BaseProps<IGrahamScan>,BaseState<IGrahamScan>>{
+    constructor(props:BaseProps<IGrahamScan>){
         super(props);
         this.state={
             play:false,
             step:0,
-            needsUpdate:false,
             pointsNum:32,
-            instance:new GrahamScan(),
+            instance:props.instance,
             planeSize:50,
             sparseRadius:20,
         }
@@ -27,28 +26,40 @@ export default class App extends React.Component<Props,State>{
     }
 
     renderData=()=>{
-        const instance=new GrahamScan()
+        const newS={...this.state}
         const list=genRandomPoints(this.state.pointsNum,this.state.sparseRadius);
-        instance.display.points.data=list;
-        instance.str.array=list;
-        this.setState({instance})
+        newS.instance.display.points.data=list;
+        newS.instance.str.array=list;
+        this.setState({instance:newS.instance,step:0})
+    }
+
+    play=()=>{
+        console.log('th')
+        this.setState({play:true})
+        setInterval(()=>{
+            if(this.state.play)
+                this.handleStep()
+        },500);
     }
 
     handleStep(){
         const toReturn={...this.state};
-        const {next,instance=null}=this.state.instance.steps[this.state.step].fn(this.state.instance)
+        const {next,instance=null,step}=this.state.instance.steps[this.state.step].fn(this.state.instance)
+        if(instance!==null){
+            toReturn.instance=instance as IGrahamScan;
+        }
         if(next){
             toReturn.step=toReturn.step+1;
         }
-        if(instance!==null){
-            const {display,str}=instance;
-            const instance2={...this.state.instance,display,str};
-            this.setState({instance:instance2})
+        if(step){
+            toReturn.step=step;
         }
+        console.log(step)
         this.setState(toReturn)
     }
 
     render(){
+        console.log(this.state.instance)
         const renderdata=this.state.instance.getRender(this.state.instance);
 
         return <div className="flex flex-col w-screen h-screen md:flex-row">
@@ -63,7 +74,9 @@ export default class App extends React.Component<Props,State>{
                 setSparseRadius={(rad:number)=>this.setState({sparseRadius:rad})}
                 setPointsNum={(num:number)=>this.setState({pointsNum:num})}
                 step={this.handleStep.bind(this)}
-                play={()=>this.setState({play:true})}
+                play={()=>{
+                    this.play()
+                }}
                 pause={()=>this.setState({play:false})}
                 render={()=>this.renderData()}
             />

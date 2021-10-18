@@ -7,7 +7,7 @@ import Euclid from './Euclid';
 const CustomCanvas: React.FC<CustomCanvasProps> = ({ data, planeArgs }) => {
     return <Canvas onCreated={({gl})=>{
             gl.setClearColor(0x333333)
-        }}camera={{ position: [0, 0, 50] }}
+        }} camera={{ position: [0, 0, 50] }}
         className='w-full h-full'>
         <ambientLight intensity={0.8} />
         <Suspense fallback={<Loading />}>

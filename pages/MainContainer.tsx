@@ -24,7 +24,7 @@ const MainContainer:React.FC<{}>=()=>{
               enterFrom="-translate-y-full opacity-0 scale-50"
               enterTo="translate-y-0 opacity-100 scale-100" 
             >
-                <div className="select-none pointer-events-auto relative px-5 py-10 text-center bg-blue-300 md:shadow-xl md:pt-16 rounded-2xl">
+                <div className="select-none pointer-events-auto relative px-5 py-10 text-center bg-green-300 md:shadow-xl md:pt-16 rounded-2xl">
                     <div className="absolute top-0 w-20 h-20 overflow-hidden border-2 border-gray-100 rounded-full shadow-xl transform -translate-x-1/2 -translate-y-1/2 left-1/2 sm:border-6">
                         <Image className="filter brightness-110" src={profileImage} layout="responsive" alt="The creator Sasank" />
                     </div>

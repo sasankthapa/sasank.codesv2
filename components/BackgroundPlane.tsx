@@ -37,8 +37,8 @@ const BackgroundShader:React.FC<ShaderMaterialProps> = (props) => {
                 void main(){
                     vec2 st=gl_FragCoord.xy/u_resolution;
                     vec3 color = vec3(circle(st,abs(sin(u_time*0.332))+1.028));
-                    
-                    gl_FragColor=vec4(vec3(abs(sin(u_time*.2)),0,0.8),st.x * st.y);
+                   //vec3(abs(sin(u_time*.2)),0,0.8) 
+                    gl_FragColor=vec4(0.5,0.6,0.8,0.8);
                 }
                 `
             }

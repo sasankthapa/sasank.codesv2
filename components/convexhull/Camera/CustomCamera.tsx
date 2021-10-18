@@ -4,11 +4,10 @@ import { Vector2, Vector3 } from 'three';
 
 interface CustomCameraProps{
     mouseUV:Vector2,
-    targetPosition:Vector2,
     zoom:number
 }
 
-const CustomCamera:React.FC<CustomCameraProps> = ({mouseUV,targetPosition,zoom}) => {
+const CustomCamera:React.FC<CustomCameraProps> = ({mouseUV,zoom}) => {
     const {camera}=useThree()
     
     useFrame(()=>{
@@ -16,7 +15,7 @@ const CustomCamera:React.FC<CustomCameraProps> = ({mouseUV,targetPosition,zoom})
         let toAdd:Vector2=new Vector2();
         let z=0;
         if(mouseUV.x !== currPosition.x || mouseUV.y !== currPosition.y ){
-            toAdd=mouseUV.clone().divideScalar(10).sub(currPosition).divide(new Vector2(5,5))
+            toAdd=mouseUV.clone().divideScalar(2).sub(currPosition).divide(new Vector2(10,10))
         }
         if(camera.position.z!=zoom){
             z=(zoom-camera.position.z)/5;

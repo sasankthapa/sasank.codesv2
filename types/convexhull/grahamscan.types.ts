@@ -2,7 +2,8 @@ import {BaseAlgorithm, BaseState, IStack, point, points, RenderData } from './ap
 
 type stepReturn<T>={
     next:boolean,
-    instance?:T
+    instance?:T,
+    step?:number
 }
 
 export type Step<T extends BaseAlgorithm>={
@@ -23,19 +24,35 @@ export interface IGrahamScan extends BaseAlgorithm{
         mid:point,
         end:point,
         testingLine:points
-    },
+    };
     str:{
         i:number,
         array:Array<THREE.Vector2>,
         stack:IStack<THREE.Vector2>,
-    },
-}
-
-export interface GrahamScanClass extends IGrahamScan{
-    steps:Array<Step<IGrahamScan>>
+    };
+    steps:Array<Step<IGrahamScan>>;
     getRender(instance:IGrahamScan):RenderData
 }
 
+export interface IGrahamScan2 extends BaseAlgorithm{
+    display:{
+        points:points,
+        hull:points,
+        hull2:points,
+        lowest:point,
+        start:point,
+        mid:point,
+        end:point,
+        testingLine:points
+    };
+    str:{
+        i:number,
+        array:Array<THREE.Vector2>,
+        stack:IStack<THREE.Vector2>,
+    };
+    steps:Array<Step<IGrahamScan>>;
+    getRender(instance:IGrahamScan):RenderData
+}
 // --TODO-- 
 // implement redux stores to handle this mess and the UI
 export interface AlgorithmDisplayProps{
@@ -51,10 +68,4 @@ export interface AlgorithmDisplayProps{
     play:()=>void;
     pause:()=>void;
     render:()=>void;
-}
-
-export interface GrahamScanApp extends BaseState<GrahamScanClass>{
-}
-
-export interface GrahamScanProps{
 }

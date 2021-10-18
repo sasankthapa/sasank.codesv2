@@ -22,7 +22,7 @@ const LineRenderer:React.FC<LineRendererProps>=({linesData})=>{
 
     return <group>
         {linesData.map((line,index)=>{
-                return <lineSegments key={"line"+line.index} geometry={linesBuffers[index]}>
+                return <lineSegments key={"line"+index} geometry={linesBuffers[index]}>
                 <lineBasicMaterial attach="material" color={line.color} linewidth={10} />
             </lineSegments>
     })}

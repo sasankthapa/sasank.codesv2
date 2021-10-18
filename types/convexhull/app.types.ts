@@ -38,6 +38,19 @@ export interface IStack<T>{
     get():Array<T>
 }
 
+type stepReturn<T>={
+    next:boolean,
+    instance?:T,
+    step?:number
+}
+
+export type Step<T extends BaseAlgorithm>={
+    index?:number,
+    info:string, 
+    psuedo:string,// <pre> string
+    fn:(instance:T, fast?:boolean)=>stepReturn<T>, // returns whether we go to next step or not
+}
+
 export interface BaseAlgorithm{
     name:string,
     display:{
@@ -53,14 +66,16 @@ export interface BaseState<T extends BaseAlgorithm>{
     step:number,
     pointsNum:number,
     instance:T,
-    needsUpdate:boolean,
     sparseRadius:number,
     planeSize:number,
+}
+
+export interface BaseProps<T extends BaseAlgorithm>{
+    instance:T,
 }
 
 export interface CustomCanvasProps{
     planeArgs:[number,number,number,number];
     data:RenderData;
 }
-
 

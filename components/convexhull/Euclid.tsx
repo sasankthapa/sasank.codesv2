@@ -9,7 +9,6 @@ import PolygonRenderer from './Renderers/PolygonRenderer';
 
 const Euclid:React.FC<EuclidProps>=({pointData,pointsData,linesData,polyData,planeArgs})=>{
     const plane=useRef(null);
-    const [cameraPos,setCameraPos]=useState(new Vector2(0,0));
     const [cameraZoom,setCameraZoom]=useState(50);
     const [drag,setDrag]=useState(false);
     const [mouseUV,setMouseUV]=useState(new Vector2(0,0))
@@ -44,16 +43,16 @@ const Euclid:React.FC<EuclidProps>=({pointData,pointsData,linesData,polyData,pla
     }
 
     return <>
-        <CustomCamera mouseUV={mouseUV} targetPosition={cameraPos} zoom={cameraZoom}/>
+        <CustomCamera mouseUV={mouseUV} zoom={cameraZoom}/>
         <group position={[-100,-100,0]}>
         <mesh ref={plane} onWheel={handleWheel} onPointerLeave={()=>setDrag(false)} onPointerMove={dragMove} onPointerDown={dragStart} onPointerUp={dragEnd} position={[100,100,0]}>
             <planeGeometry attach="geometry" args={planeArgs}/>
             <meshStandardMaterial color={0x000000}/>
         </mesh>
         <group position={[100,100,0.1]}>
-            <PolygonRenderer polyData={polyData}/>
             <LineRenderer linesData={linesData} />
             <PointsRenderer pointData={pointData} pointsData={pointsData}/>
+            <PolygonRenderer polyData={polyData}/>
         </group>
     </group>
     </>
