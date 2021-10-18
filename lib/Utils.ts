@@ -11,6 +11,7 @@ function getRandF(min:number, max:number) {
 
 export const genRandomPoints=(n:number,sparse:number)=>{
     const toReturn:Array<THREE.Vector2>=[];
+    // We use a map to store the points to prevent duplicates
     const map=new Map<number,Set<number>>();
     for(let i=0 ;i < n ;i++){
         const x=getRandInt(-sparse, sparse);
@@ -31,15 +32,14 @@ export const genRandomPoints=(n:number,sparse:number)=>{
             map.set(x,set)
         }
     }
-    console.log(toReturn)
     return toReturn;
 }
 
 export class Stack<T> implements IStack<T>{
     private storage:Array<T>=[];
 
-    getLast(n:number){
-        return this.storage.splice(n)
+    get(){
+        return this.storage
     }
     
     push(item:T){

@@ -42,7 +42,7 @@ export const sortBasedOnAngle=(lowest:THREE.Vector2,arr:Array<THREE.Vector2>)=>{
     })
     console.log(sorted)
     console.log(sorted.map)
-    return sorted.slice(1).map((curr)=>{
+    return sorted.map((curr)=>{
         return curr.point;
     });
 }

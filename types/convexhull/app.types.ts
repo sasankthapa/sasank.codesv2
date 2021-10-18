@@ -31,7 +31,7 @@ export interface IStack<T>{
     pop():T|undefined,
     peek():T|undefined,
     size():number,
-    getLast(last:number):Array<T>
+    get():Array<T>
 }
 
 export interface BaseAlgorithm{

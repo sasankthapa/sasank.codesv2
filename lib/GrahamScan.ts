@@ -68,7 +68,8 @@ export class GrahamScan implements GrahamScanClass{
             psuedo:'Sort Points w angle to lowest()',
             fn:(instance:IGrahamScan)=>{
                 const sorted=sortBasedOnAngle(instance.display.lowest.data,instance.str.array)
-                console.log(sorted)
+                console.log(instance.str.array.length)
+                console.log(sorted.length)
                 instance.str.array=sorted;
                 return {next:true,instance}
             },
@@ -77,14 +78,15 @@ export class GrahamScan implements GrahamScanClass{
             psuedo:'Add first 3 points to stack',
             fn:({display,str}:IGrahamScan)=>{
                 str.stack.push(display.lowest.data)
-                str.stack.push(str.array[0])
                 str.stack.push(str.array[1])
+                str.stack.push(str.array[2])
                 display.start.data=display.lowest.data;
-                display.mid.data=str.array[0];
-                display.end.data=str.array[1];
-                str.i=3;
-                display.hull.data=str.stack.getLast(-1);
-                display.hull2.data=str.stack.getLast(-1);
+                display.mid.data=str.array[1];
+                display.end.data=str.array[2];
+                display.testingLine.data=[]
+                display.testingLine.data.push(display.start.data)
+                display.testingLine.data.push(display.mid.data)
+                display.testingLine.data.push(display.end.data)
                 const instance={display,str} as IGrahamScan
                 return {next:true,instance}
             },
@@ -94,7 +96,7 @@ export class GrahamScan implements GrahamScanClass{
             fn:(instance:IGrahamScan)=>{
             console.log(instance.display.hull2.data);
             console.log(instance.str.stack);
-            instance.str.i+=1;
+            instance.str.i=3;
             return {next:true,instance}
             },
         },{
@@ -109,18 +111,29 @@ export class GrahamScan implements GrahamScanClass{
                     console.log('left')
                     instance.str.stack.push(instance.display.end.data);
                 }
-                const [a,b]=instance.str.stack.getLast(-2);
-                console.log(a,b)
-                instance.display.start.data=a;
-                instance.display.mid.data=b;
+                const arr=instance.str.stack.get().slice(-2);
+                console.log(arr.slice(-2))
+                instance.display.start.data=arr[0];
+                instance.display.mid.data=arr[1];
                 instance.display.end.data=instance.str.array[instance.str.i];
                 instance.display.testingLine.data=[]
-                instance.display.testingLine.data.push(a)
-                instance.display.testingLine.data.push(b)
+                instance.display.testingLine.data.push(arr[0])
+                instance.display.testingLine.data.push(arr[1])
                 instance.display.testingLine.data.push(instance.str.array[instance.str.i])
                 instance.str.i+=1;
-                return {next:false,instance}
-            },
+                if(instance.str.i <instance.str.array.length){
+                    return {next:false,instance}
+                }
+                return {next:true,instance}
+            }, 
+        },{
+            info:"",
+            psuedo:'displayHull()',
+            fn:(instance:IGrahamScan)=>{
+                instance.display.hull2.data=instance.str.stack.get();
+                instance.display.hull.data=instance.str.stack.get();
+                return {next:false}
+            }
         },
     ];
 }
