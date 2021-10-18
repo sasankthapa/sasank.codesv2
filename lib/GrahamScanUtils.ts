@@ -50,10 +50,8 @@ export const sortBasedOnAngle=(lowest:THREE.Vector2,arr:Array<THREE.Vector2>)=>{
 export const validatePoints=(start:THREE.Vector2,mid:THREE.Vector2,end:THREE.Vector2)=>{
     const AB=mid.clone().sub(start); // AB = B-A
     const BC=end.clone().sub(mid); 
-    const dot=AB.dot(BC)
-    const mag=AB.length()*BC.length();
-    const ang=Math.acos(dot/mag);
-    console.log(ang)
-    return ang<0;
+    const area=AB.cross(BC)
+    console.log(area)
+    return area<0;
 }
 

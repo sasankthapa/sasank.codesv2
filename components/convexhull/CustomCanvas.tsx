@@ -11,7 +11,8 @@ const CustomCanvas: React.FC<CustomCanvasProps> = ({ data, planeArgs }) => {
         className='w-full h-full'>
         <ambientLight intensity={0.8} />
         <Suspense fallback={<Loading />}>
-            <Euclid pointsData={data.pointsData} pointData={data.pointData} linesData={data.linesData} planeArgs={planeArgs} />
+            <Euclid pointsData={data.pointsData} pointData={data.pointData} linesData={data.linesData} 
+            polyData={data.polyData} planeArgs={planeArgs} />
         </Suspense>
     </Canvas>
 }

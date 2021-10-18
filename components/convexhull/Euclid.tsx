@@ -5,8 +5,9 @@ import PointsRenderer from './Renderers/PointsRenderer';
 import LineRenderer from './Renderers/LineRenderer';
 import CustomCamera from './Camera/CustomCamera';
 import {  Vector2 } from 'three';
+import PolygonRenderer from './Renderers/PolygonRenderer';
 
-const Euclid:React.FC<EuclidProps>=({pointData,pointsData,linesData,planeArgs})=>{
+const Euclid:React.FC<EuclidProps>=({pointData,pointsData,linesData,polyData,planeArgs})=>{
     const plane=useRef(null);
     const [cameraPos,setCameraPos]=useState(new Vector2(0,0));
     const [cameraZoom,setCameraZoom]=useState(50);
@@ -50,6 +51,7 @@ const Euclid:React.FC<EuclidProps>=({pointData,pointsData,linesData,planeArgs})=
             <meshStandardMaterial color={0x000000}/>
         </mesh>
         <group position={[100,100,0.1]}>
+            <PolygonRenderer polyData={polyData}/>
             <LineRenderer linesData={linesData} />
             <PointsRenderer pointData={pointData} pointsData={pointsData}/>
         </group>

@@ -15,8 +15,8 @@ export class GrahamScan implements GrahamScanClass{
     stack=new Stack<Vector2>();
     display={
         points:{type:'points',color:0xf0f0ff} as points,
-        hull:{type:'points',color:0xff0fff} as points,
-        hull2:{type:'line',color:0xff00ff} as points,
+        hull:{type:'points',color:0x00ff00,size:1.5} as points,
+        hull2:{type:'poly',color:0xff0000} as points,
         lowest:{type:'point',color:0x00ff00,size:1.3} as point,
         start:{type:'point',color:0xffff00,size:2} as point,
         mid:{type:'point',color:0xff00f0,size:2} as point,
@@ -25,19 +25,17 @@ export class GrahamScan implements GrahamScanClass{
     }
 
     getRender(instance:IGrahamScan){
-        const toReturn:RenderData={pointData:[],pointsData:[],linesData:[]}
+        const toReturn:RenderData={pointData:[],pointsData:[],linesData:[],polyData:[]}
         for(const [k,v] of Object.entries(instance.display)){
-            console.log(k,v)
             if(v.data){
                 if(v.type==='point'){
-                    console.log(k)
                     toReturn.pointData?.push(v as point);
                 }else if(v.type==='points'){
-                    console.log(k)
                     toReturn.pointsData?.push(v as points);
                 }else if(v.type==='line'){
-                    console.log(k)
                     toReturn.linesData?.push(v as points);
+                }else if(v.type==='poly'){
+                    toReturn.polyData?.push(v as points);
                 }
             }
         }
@@ -105,14 +103,13 @@ export class GrahamScan implements GrahamScanClass{
             fn:(instance:IGrahamScan)=>{
                 const pop=validatePoints(instance.display.start.data,instance.display.mid.data,instance.display.end.data);
                 if(pop){
-                    console.log('rgiht')
                     instance.str.stack.pop()
+                    //while
                 }else{
-                    console.log('left')
                     instance.str.stack.push(instance.display.end.data);
+                    return {next:true}
                 }
                 const arr=instance.str.stack.get().slice(-2);
-                console.log(arr.slice(-2))
                 instance.display.start.data=arr[0];
                 instance.display.mid.data=arr[1];
                 instance.display.end.data=instance.str.array[instance.str.i];
@@ -122,6 +119,9 @@ export class GrahamScan implements GrahamScanClass{
                 instance.display.testingLine.data.push(instance.str.array[instance.str.i])
                 instance.str.i+=1;
                 if(instance.str.i <instance.str.array.length){
+                    const hull=instance.str.stack.get();
+                    instance.display.hull2.data=hull;
+                    instance.display.hull.data=hull;
                     return {next:false,instance}
                 }
                 return {next:true,instance}
@@ -130,8 +130,12 @@ export class GrahamScan implements GrahamScanClass{
             info:"",
             psuedo:'displayHull()',
             fn:(instance:IGrahamScan)=>{
-                instance.display.hull2.data=instance.str.stack.get();
-                instance.display.hull.data=instance.str.stack.get();
+                const hull=instance.str.stack.get();
+                console.log(hull.length)
+                instance.display.hull2.data=hull;
+                instance.display.hull2.data.push();
+
+                instance.display.hull.data=hull;
                 return {next:false}
             }
         },
