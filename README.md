@@ -2,6 +2,6 @@
 
 Current portfolio site: https://sasank.codes. 
 
-Next JS, React JS, Typescript, Deployed using Vercel.
-
-/pages/api/notion.ts recursively gets data blocks and parses them.
+TODOS:
+1) Notion API is too basic need a more generalized version for more queries.
+2) Setup Redux for state management
