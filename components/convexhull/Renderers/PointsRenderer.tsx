@@ -19,14 +19,14 @@ const PointsRenderer:React.FC<PointsRendererProps>=({pointData,pointsData})=>{
         })
     },[pointsData])
 
-    return <group>
+    return <group position={[0,0,0.2]}>
         {pointsData?.map((point,index)=>{
             return <points key={'point'+index} geometry={pointsBuffers[index]}>
                 <pointsMaterial size={point.size} transparent={true} map={texture} attach="material" color={point.color}/>
             </points>
         })}
         {pointData?.map((point,index)=>{
-            return <points key={'points'+index} geometry={pointBuffers[index]}>
+            return <points position={[0,0,0.1]} key={'points'+index} geometry={pointBuffers[index]}>
                 <pointsMaterial size={point.size} transparent={true} map={texture} attach="material" color={point.color}/>
             </points>
         })}

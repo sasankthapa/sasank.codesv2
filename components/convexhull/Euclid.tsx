@@ -50,9 +50,9 @@ const Euclid:React.FC<EuclidProps>=({pointData,pointsData,linesData,polyData,pla
             <meshStandardMaterial color={0x000000}/>
         </mesh>
         <group position={[100,100,0.1]}>
+            <PolygonRenderer polyData={polyData}/>
             <LineRenderer linesData={linesData} />
             <PointsRenderer pointData={pointData} pointsData={pointsData}/>
-            <PolygonRenderer polyData={polyData}/>
         </group>
     </group>
     </>

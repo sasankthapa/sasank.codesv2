@@ -15,7 +15,7 @@ export default class App extends React.Component<BaseProps<IGrahamScan>,BaseStat
             play:false,
             step:0,
             pointsNum:32,
-            instance:props.instance,
+            instance:new GrahamScan(),
             planeSize:50,
             sparseRadius:20,
         }
@@ -26,25 +26,31 @@ export default class App extends React.Component<BaseProps<IGrahamScan>,BaseStat
     }
 
     renderData=()=>{
-        const newS={...this.state}
+        const instance=new GrahamScan()
         const list=genRandomPoints(this.state.pointsNum,this.state.sparseRadius);
-        newS.instance.display.points.data=list;
-        newS.instance.str.array=list;
-        this.setState({instance:newS.instance,step:0})
+        instance.display.points.data=list;
+        instance.str.array=list;
+        this.setState({play:false,instance,step:0})
     }
 
     play=()=>{
-        console.log('th')
         this.setState({play:true})
         setInterval(()=>{
             if(this.state.play)
                 this.handleStep()
-        },500);
+        },100);
     }
 
     handleStep(){
+        if(this.state.step >= this.state.instance.steps.length ){
+            console.log('her')
+            return 
+        }
         const toReturn={...this.state};
         const {next,instance=null,step}=this.state.instance.steps[this.state.step].fn(this.state.instance)
+        if(this.state.step===this.state.instance.steps.length-1){//last step
+            return this.setState({play:false})
+        }
         if(instance!==null){
             toReturn.instance=instance as IGrahamScan;
         }
@@ -54,17 +60,18 @@ export default class App extends React.Component<BaseProps<IGrahamScan>,BaseStat
         if(step){
             toReturn.step=step;
         }
-        console.log(step)
         this.setState(toReturn)
     }
 
     render(){
-        console.log(this.state.instance)
         const renderdata=this.state.instance.getRender(this.state.instance);
+        console.log(renderdata)
 
         return <div className="flex flex-col w-screen h-screen md:flex-row">
             <DynamicCanvas data={renderdata} planeArgs={[this.state.planeSize,this.state.planeSize,10,10]}/>
             <AlgorithmDisplay 
+                playing={this.state.play}
+                algoName={this.state.instance.name}
                 steps={this.state.instance.steps}
                 currStep={this.state.step} 
                 currPlaneSize={this.state.planeSize}
@@ -83,3 +90,4 @@ export default class App extends React.Component<BaseProps<IGrahamScan>,BaseStat
         </div>
     }
 }
+

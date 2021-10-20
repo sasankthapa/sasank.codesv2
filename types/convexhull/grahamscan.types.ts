@@ -18,7 +18,9 @@ export interface IGrahamScan extends BaseAlgorithm{
     display:{
         points:points,
         hull:points,
-        hull2:points,
+        hullPoly:points,
+        hullLine:points,
+        innerhull:points,
         lowest:point,
         start:point,
         mid:point,
@@ -29,33 +31,17 @@ export interface IGrahamScan extends BaseAlgorithm{
         i:number,
         array:Array<THREE.Vector2>,
         stack:IStack<THREE.Vector2>,
+        innerhull:Array<THREE.Vector2>
     };
     steps:Array<Step<IGrahamScan>>;
     getRender(instance:IGrahamScan):RenderData
 }
 
-export interface IGrahamScan2 extends BaseAlgorithm{
-    display:{
-        points:points,
-        hull:points,
-        hull2:points,
-        lowest:point,
-        start:point,
-        mid:point,
-        end:point,
-        testingLine:points
-    };
-    str:{
-        i:number,
-        array:Array<THREE.Vector2>,
-        stack:IStack<THREE.Vector2>,
-    };
-    steps:Array<Step<IGrahamScan>>;
-    getRender(instance:IGrahamScan):RenderData
-}
 // --TODO-- 
 // implement redux stores to handle this mess and the UI
 export interface AlgorithmDisplayProps{
+    algoName:string,
+    playing:boolean,
     steps:Array<Step<any>>,
     currStep:number,
     currPlaneSize:number,

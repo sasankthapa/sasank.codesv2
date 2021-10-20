@@ -54,7 +54,7 @@ export type Step<T extends BaseAlgorithm>={
 export interface BaseAlgorithm{
     name:string,
     display:{
-        [key:string]:point|points
+        [key:string]:point|points|null;
     },
     str:{
         [key:string]:any

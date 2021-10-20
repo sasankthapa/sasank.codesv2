@@ -21,7 +21,7 @@ const PolygonRenderer:React.FC<PolygonRendererProps>=({polyData})=>{
         })
     },[polyData])
 
-    return <group position={[0,0,0.2]}>
+    return <group>
         {polyData.map((poly,index)=>{
                 console.log(polyBuffers[index])
                 return <mesh key={"poly"+index} geometry={polyBuffers[index]}>
