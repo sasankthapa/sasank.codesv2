@@ -10,7 +10,7 @@ const Home: NextPage<StaticProps> = (props) => {
     <div className="min-h-screen bg-gray-300">
       <Head>
         <title>Sasank Thapa</title>
-        <meta name="Sasank Thapa" content="Work by Sasank, About, Sasank" />
+        <meta name="Sasank Thapa" content="Sasank personal website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
