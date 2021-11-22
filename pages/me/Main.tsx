@@ -1,7 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import Header from './Header';
 import dynamic from 'next/dynamic';
-import {SlideFromRight} from '../../components/hoc/SlidesAnimation';
 import MoreButton from './MoreButton';
 import {StaticProps} from '../../types/main.types'
 import { Transition } from '@headlessui/react';

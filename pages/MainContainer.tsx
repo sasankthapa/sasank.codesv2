@@ -14,8 +14,6 @@ const DynamicRenderer=dynamic(
 
 const MainContainer:React.FC<{}>=()=>{
     return <>
-        {//<DynamicRenderer />
-        }
         <div className="bg-blue-200 absolute flex box-content items-center justify-center w-screen h-screen pointer-events-none">
             <Transition
               as={Fragment}
