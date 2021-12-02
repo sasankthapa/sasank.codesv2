@@ -1,3 +1,3 @@
 import redirect from 'nextjs-redirect'
 
-export default redirect('https://github.com/sasankthapa/ChineseFlashCards')
+export default redirect('https://github.com/sasankthapa/chinese-flashcards')

@@ -6,6 +6,7 @@ import {TiDocumentText} from 'react-icons/ti'
 import Image from 'next/image'
 import profileImage from '../public/static/images/profile.jpg'
 import dynamic from 'next/dynamic';
+import Layover from '../components/Layover/Layover';
 
 const DynamicRenderer=dynamic(
     ()=> import('../components/GLRenderer'),
@@ -14,6 +15,7 @@ const DynamicRenderer=dynamic(
 
 const MainContainer:React.FC<{}>=()=>{
     return <>
+        <Layover github="https://github.com/sasankthapa/sasank.codesv2"/>
         <div className="bg-blue-200 absolute flex box-content items-center justify-center w-screen h-screen pointer-events-none">
             <Transition
               as={Fragment}
@@ -30,12 +32,12 @@ const MainContainer:React.FC<{}>=()=>{
                     <h1 className="relative mb-5 text-3xl text-center border-b-2 border-black lg:text-3xl">
                         Sashank Thapa
                     </h1>
-                    <Link href="/me" passHref>
+                    <Link href="About me" passHref>
                         <button className="w-full hover:bg-purple-200 p-2 mb-3 rounded-lg cursor-pointer transition-colors shadow-sm bg-blue-50">
                             <a>/me</a>
                         </button>
                     </Link>   
-                    <Link href="/convexhull" passHref>    
+                    <Link href="Convex Hull Algorithm" passHref>    
                         <button className="w-full p-2 mb-3 rounded-lg cursor-pointer hover:bg-purple-200 transition-colors shadow-sm bg-blue-50">
                             <a>/convexhull</a>
                         </button>
