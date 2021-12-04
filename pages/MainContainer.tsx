@@ -32,14 +32,14 @@ const MainContainer:React.FC<{}>=()=>{
                     <h1 className="relative mb-5 text-3xl text-center border-b-2 border-black lg:text-3xl">
                         Sashank Thapa
                     </h1>
-                    <Link href="About me" passHref>
+                    <Link href="me" passHref>
                         <button className="w-full hover:bg-purple-200 p-2 mb-3 rounded-lg cursor-pointer transition-colors shadow-sm bg-blue-50">
-                            <a>/me</a>
+                            <a>About</a>
                         </button>
                     </Link>   
-                    <Link href="Convex Hull Algorithm" passHref>    
+                    <Link href="convexhull" passHref>    
                         <button className="w-full p-2 mb-3 rounded-lg cursor-pointer hover:bg-purple-200 transition-colors shadow-sm bg-blue-50">
-                            <a>/convexhull</a>
+                            <a>Convex Hull</a>
                         </button>
                     </Link>   
                     <div className="flex flex-row items-center justify-center w-full mt-2 gap-10 md:gap-3">
