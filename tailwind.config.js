@@ -5,11 +5,23 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
-        animation:{
+      keyframes: {
+        moveRight: {
+          '0%, 100%': { transform: 'translateX(0%)' },
+          '50%': { transform: 'translateX(25%)' },
         },
-        fontFamily:{
-            'inter':['"Inter"',...defaultTheme.fontFamily.sans]
-        }
+        moveLeft: {
+          '0%, 100%': { transform: 'translateX(0%)' },
+          '50%': { transform: 'translateX(-25%)' },
+        },
+      },
+      animation: {
+        moveRight: 'moveRight 50s linear infinite',
+        moveLeft: 'moveLeft 50s linear infinite',
+      },
+      fontFamily: {
+        'inter': ['"Inter"', ...defaultTheme.fontFamily.sans]
+      }
     },
   },
   variants: {
