@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+//import
 //Renderers
 type rawPoint=THREE.Vector2;
 type rawPoints=Array<THREE.Vector2>;

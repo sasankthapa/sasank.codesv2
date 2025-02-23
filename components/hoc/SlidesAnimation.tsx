@@ -3,6 +3,7 @@ import {Transition} from '@headlessui/react';
 
 interface AnimationProps{
     delay?:number
+    children:any
 }
 
 export const SlideFromRight:React.FC<AnimationProps>=(props)=>{

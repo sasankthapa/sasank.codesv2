@@ -1,4 +1,5 @@
 import {BaseAlgorithm, BaseState, IStack, point, points, RenderData } from './app.types'
+import * as THREE from 'three';
 
 type stepReturn<T>={
     next:boolean,

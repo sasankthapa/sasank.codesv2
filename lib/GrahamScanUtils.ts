@@ -1,4 +1,4 @@
-import { Vector2 } from "three";
+import * as THREE from "three";
 
 export const findLowestYInArray=(points:Array<THREE.Vector2>):THREE.Vector2=>{
     let lowestY=Infinity;
@@ -16,11 +16,11 @@ export const findLowestYInArray=(points:Array<THREE.Vector2>):THREE.Vector2=>{
             }
         }
     })
-    return lowestPoint!==null?lowestPoint:new Vector2(-1,-1);
+    return lowestPoint!==null?lowestPoint:new THREE.Vector2(-1,-1);
 }
 
 function findAngleX(x:THREE.Vector2,y:THREE.Vector2){
-    const v=new Vector2(y.x,y.y).sub(x);
+    const v=new THREE.Vector2(y.x,y.y).sub(x);
     return v.angle();
 }
 

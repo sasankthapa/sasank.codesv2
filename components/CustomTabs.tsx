@@ -26,6 +26,7 @@ const CustomTabs:React.FC<CustomTabsProps>=({recent,frontend,ml,algo})=>{
     }
 
     return (
+        <>
             <SlideFromTop>
                 <div className="w-full mt-7">
                     <Tab.Group defaultIndex={0}>
@@ -44,6 +45,7 @@ const CustomTabs:React.FC<CustomTabsProps>=({recent,frontend,ml,algo})=>{
                     </Tab.Group>
                 </div>
             </SlideFromTop>
+        </>
     )
 }
 

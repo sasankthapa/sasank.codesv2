@@ -1,4 +1,4 @@
-import {Vector2} from "three";
+import * as THREE from "three";
 import {Stack} from './Utils';
 import { BaseAlgorithm, point, points, RenderData} from '../types/convexhull/app.types'
 import { IGrahamScan, Step } from "../types/convexhull/grahamscan.types";
@@ -144,9 +144,9 @@ export class GrahamScan implements IGrahamScan{
             psuedo:'displayHull()',
             fn:(instance:IGrahamScan)=>{
                 instance.display.hullLine.data=[]
-                instance.display.start.data=new Vector2(100,100);
-                instance.display.mid.data=new Vector2(100,100);
-                instance.display.end.data=new Vector2(100,100);
+                instance.display.start.data=new THREE.Vector2(100,100);
+                instance.display.mid.data=new THREE.Vector2(100,100);
+                instance.display.end.data=new THREE.Vector2(100,100);
                 instance.display.testingLine.data=[]
                 const hull=instance.str.stack.get();
                 instance.display.hullPoly.data=hull;
