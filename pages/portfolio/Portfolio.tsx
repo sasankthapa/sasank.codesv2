@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { FaArrowDown, FaExternalLinkAlt, FaExternalLinkSquareAlt, FaGithub, FaLinkedin, FaMailBulk, FaMailchimp } from 'react-icons/fa';
 
@@ -41,12 +42,8 @@ const Portfolio: React.FC = () => {
           
           {/* Social Links */}
           <div className="flex gap-6 mt-8">
-            <a href="#" className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-110">
-              <FaLinkedin className="w-6 h-6" />
-            </a>
-            <a href="#" className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-110">
-              <FaGithub className="w-6 h-6" />
-            </a>
+            <Link href="https://linkedin.com/in/sasank-t-b815b1104/" target="_blank" rel="noreferrer"><FaLinkedin className="m-1 text-xl lg:text-2xl" /></Link>
+            <Link href="https://github.com/sasankthapa" target='_blank' rel='noreferrer'><FaGithub className="m-1 text-xl lg:text-2xl" /></Link>
             <a href="mailto:sasank.thapa2000@gmail.com" className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-110">
               <FaMailBulk className="w-6 h-6" />
             </a>
@@ -80,27 +77,8 @@ const Portfolio: React.FC = () => {
           
           <div className="bg-white/5 rounded-2xl p-6 hover:bg-white/10 transition-colors duration-300">
             <div className="bg-white rounded-xl overflow-hidden shadow-2xl">
-              <iframe
-                src="https://lucid.app/lucidspark/fdf31a90-ec0c-450e-aac3-164f7736a93b/edit?viewport_loc=-669%2C-482%2C3329%2C1811%2CWo7XGUmFX9uF&invitationId=inv_4fcb3f2d-b76b-450c-a634-18f647095b3b"
-                width="100%"
-                height="600"
-                allowFullScreen
-                className="w-full"
-                title="Lucidchart Diagram"
-              ></iframe>
-            </div>
-          </div>
-          
-          <div className="text-center mt-8">
-            <a 
-              href="https://lucid.app/documents/view/your-lucidchart-id" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-purple-300 hover:text-purple-200 transition-colors duration-300"
-            >
-              <FaExternalLinkAlt className="w-5 h-5" />
-              View Full Diagram
-            </a>
+            <iframe 
+            allowFullScreen width="100" height="720" className="w-full" src="https://lucid.app/documents/embedded/fdf31a90-ec0c-450e-aac3-164f7736a93b" id="WT9xAFgxeuSu"></iframe></div>
           </div>
         </div>
       </section>
