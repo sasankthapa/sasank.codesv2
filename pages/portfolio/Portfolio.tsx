@@ -87,22 +87,22 @@ const Portfolio: React.FC = () => {
               id:""
             },{
               title:"AI Timeline",
-              description:"Timeline of AI",
+              description:"Timeline diagram of AI with focus on AI Winters 🥶",
               link:"",
               id:"diagram"
             },{
               title:"Blog: My favorite machine learning models(CNN and Linear Regression)",
-              description:"",
+              description:"A small rant about CNN's and Linear Regression (and why I like them)",
               link:"",
               id:"CNNVSLINEARREGRESSION"
             },{
-              title:"Blog: Machine Learning techniques",
-              description:"",
+              title:"Blog: Machine Learning Basics",
+              description:"Answering some basic machine learning questions",
               link:"",
               id:"MACHINELEARNINGTECHNIQUES"
             },{
-              title:"Blog: Data Cleaning techniques",
-              description:"",
+              title:"Blog: Dealing with Dirty Data",
+              description:"Methods to deal with dirty data",
               link:"",
               id:"DATACLEANINGTECHNIQUES"
             }
@@ -139,20 +139,61 @@ const Portfolio: React.FC = () => {
               description:`<span class="text-2xl">Machine learning example: Linear Regression</span><br/><br/>
 Linear regression is interesting because when we think about regression, we usually think of a 2-dimentional graph with multiple dots. I remember taking a ruler and drawing the line best fit for this graph, meticulously measuring the distance between the points and the line.<br/>
 The big difference in an actual linear regression algorithm is that it can have an “n” number of dimensions. So, we can have a dataset with 100, 300, or even thousands of dimensions, and we can still have a linear regression model.A linear regression model is best for any problem that has a clear linear relationship.<br/><br/>
-<span class="text-xl">Real world example: Predicting medical cost based on patient data</span><br/><br/>
+<span class="text-xl">Real world example: Predicting medical cost based on patient data</span><br/>
 Using data of patients like age, sex, income, current medical cost, maybe even location and number of medical checkups per year. We will be able to create a model for cost for the patient. We can use these data to train a linear regression model and create a good cost model for predicting it.<br/><br/>
 \n
-<span class="text-2xl">Deep learning example: Convolutional Neural Network (CNN)</span><br/><br/>
+<span class="text-2xl">Deep learning example: Convolutional Neural Network (CNN)</span><br/>
 A Convolutional Neural Network (CNN) is a type of neural network that works really well for image processing. This is because of the architecture of CNN. The start of this neural network is a matrix of nodes, with this matrix getting smaller and smaller, until the matrix is 1x1, which would help us classify the data. Since we can parse an image into a matrix of data, like a group of pixels by pixels, we can easily pass this image data into a CNN. <br/><br/>
 
-<span class="text-xl">Real world example: Optical Character Recognition (OCR)</span><br/><br/>
-
+<span class="text-xl">Real world example: Optical Character Recognition (OCR)</span><br/>
 Optical character Recognition is a very important issue to solve. If we have a large amount of undigitized text, it is almost impossible to accurately and quickly digitize this information to process it or analyze it. We use scanners to turn it into photos, but the photos still don’t have the exact text information. So, we must change this into text, which is done by using an OCR, which isn’t always accurate.<br/>
 `
-          }
+          },
+          {
+          id:"MACHINELEARNINGTECHNIQUES",
+          title:"Machine Learning Basics",
+          description:`<span class="text-lg font-bold ">1. How does a supervised learning model learn from the training data?</span><br/>
+        <span class=" ml-4">Uses labeled examples (input-output pairs) to learn patterns and make predictions by minimizing prediction errors through optimization algorithms.</span><br/><br/>
+
+        <span class="text-lg font-bold ">2. What is the main approach used to train models in unsupervised learning?</span><br/>
+        <span class=" ml-4">Finds hidden patterns, structures, or relationships in unlabeled data through techniques like clustering, dimensionality reduction, or density estimation.</span><br/><br/>
+
+        <span class="text-lg font-bold ">3. In reinforcement learning, how does an agent learn the best actions to take?</span><br/>
+        <span class=" ml-4">Through trial-and-error interactions with an environment, receiving rewards/penalties for actions and updating its policy to maximize cumulative rewards over time.</span><br/><br/>
+
+        <span class="text-lg font-bold ">4. Why are algorithms important in the training of machine learning models?</span><br/>
+        <span class=" ml-4">Algorithms define how models learn from data, optimize parameters, handle different data types, and determine the learning process efficiency and effectiveness.</span><br/><br/>
+
+        <span class="text-lg font-bold ">5. What are the basic steps involved in training a machine learning model?</span><br/>
+        <span class=" ml-4">Data preparation → Model selection → Training (feeding data + optimization) → Validation → Testing → Deployment.</span><br/><br/>
+
+        <span class="text-lg font-bold ">6. How does repetition (iterating over data) help in training a model?</span><br/>
+        <span class=" ml-4">Multiple passes through data allow gradual parameter refinement, better pattern recognition, improved generalization, and convergence to optimal solutions. Although, we need to take into account that too much repetition may overfit the model.</span><br/><br/>
+
+        <span class="text-lg font-bold ">7. What is the role of examples (data) in training a machine learning model?</span><br/>
+        <span class=" ml-4">Data provides the foundation for learning - quality and quantity of examples directly determine model performance, generalization ability, and real-world applicability.</span>`
+},
+{
+id:"DATACLEANINGTECHNIQUES",
+title:"Dealing with Dirty Data",
+description:` <div>
+            <span class="text-lg font-bold">Missing data values</span><br/>
+            <span>Common approaches (and the easiest) is to delete the missing data, however this may cause our data to not be enough, instead we could Impute. Imputation techniques replace missing values with statistical measures such as mean, median, or mode for numerical data, or the most frequent category for categorical data. Advanced methods include multiple imputation, which creates several plausible values based on other parameters, and there exist some machine learning-based imputation using algorithms like KNN or regression models.</span><br/><br/>
+        </div>
+
+        <div>
+            <span class="text-lg font-bold">Dirty data with nlp</span><br/>
+            <span>Natural Language Processing faces unique data quality challenges including inconsistent formatting, spelling errors, and varying text representations. Text preprocessing involves tokenization, lowercasing, and removing special characters or stop words. Normalization techniques include stemming and lemmatization to reduce words to their root forms. Handling inconsistencies requires fuzzy matching algorithms to identify similar entries, regular expressions for pattern-based cleaning, and spell checkers for error correction. Using these tokens to adjust sentiment is key in NLP data processing. </span><br/><br/>
+        </div>
+
+        <div>
+            <span class="text-lg font-bold">Skewed dataset</span><br/>
+            <span>Class imbalance occurs when one class significantly outnumbers others, leading to biased models that favor the majority class. Undersampling majority classes through random or informed selection. Algorithmic approaches include cost-sensitive learning that assigns higher penalties to minority class misclassifications, and ensemble methods like balanced bagging or boosting. We can also shift measurement statistics to more appropriate metrics like precision, recall, F1-score, and AUC-ROC. Threshold adjustment allows fine-tuning of decision boundaries to better capture minority class instances. We can also use models that better handle these skews like Random Forest.</span><br/><br/>
+        </div>`
+}
          ].map(data => {
-          return <div className="w-full bg-white/5 rounded-2xl px-4 py-2" key={data.id} id={data.id}>
-              <h2 className="text-2xl lg:text-6xl font-bold mb-8">{data.title}</h2>
+          return <div className="w-full bg-white/5 rounded-2xl px-4 py-8 mb-9" key={data.id} id={data.id}>
+              <h2 className="text-2xl lg:text-6xl font-bold mb-8 text-center">{data.title}</h2>
 <div dangerouslySetInnerHTML={{__html:data.description}} />
             </div>
           })
