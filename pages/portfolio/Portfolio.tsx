@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import profileImage from '../../public/static/images/profile.jpg'
 import { FaArrowDown, FaArrowUp, FaExternalLinkAlt, FaExternalLinkSquareAlt, FaGithub, FaLinkedin, FaMailBulk, FaMailchimp } from 'react-icons/fa';
+import Image from 'next/image';
 
 const Portfolio: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [visibleTop, setVisibleGoToTop] = useState(false)
 
-  useEffect(() => {
-  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -16,7 +16,7 @@ const Portfolio: React.FC = () => {
     }
   };
   const openLinkOrScroll = (id:string, link:string) => {
-    if(id == 'projects') setVisibleGoToTop(false)
+    if(id == 'projects' || id == 'about') setVisibleGoToTop(false)
     else if(id != "") setVisibleGoToTop(true)
 
     if(id != "") scrollToSection(id)
@@ -58,6 +58,12 @@ const Portfolio: React.FC = () => {
         {/* Right Side - Navigation */}
         <div className="hidden lg:flex flex-col items-end space-y-6 z-10">
           <button 
+            onClick={() => openLinkOrScroll('about','')}
+            className="text-gray-300 hover:text-white transition-colors duration-300 text-lg font-medium"
+          >
+            About Me
+          </button>
+          <button 
             onClick={() => openLinkOrScroll('projects','')}
             className="text-gray-300 hover:text-white transition-colors duration-300 text-lg font-medium"
           >
@@ -67,14 +73,91 @@ const Portfolio: React.FC = () => {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <FaArrowDown onClick={()=>openLinkOrScroll('projects','')} className="w-6 h-6 text-gray-400" />
+          <FaArrowDown onClick={()=>openLinkOrScroll('about','')} className="w-6 h-6 text-gray-400" />
         </div>
 
         {visibleTop ? <div className="fixed top-8 left-4 transform -translate-x-1/2 animate-bounce">
-          <FaArrowUp onClick={()=>openLinkOrScroll('projects','')} className="w-6 h-6 text-gray-400" />
+          <FaArrowUp onClick={()=>openLinkOrScroll('about','')} className="w-6 h-6 text-gray-400" />
         </div>: null}
       </section>
 
+{/* About Section */}
+<section id="about" className="min-h-screen flex items-center px-8 lg:px-16 py-20">
+  <div className="max-w-6xl mx-auto">
+<div className="flex flex-row items-center justify-start">
+        <div className="flex justify-center lg:justify-start mb-8">
+  <div className="relative group">
+    {/* Main circular image */}
+    <div className="w-32 h-32 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-white/20 hover:border-white/40 transition-all duration-300 group-hover:scale-105">
+      <Image 
+        src={profileImage} 
+        alt="Sasank Thapa" 
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+      />
+    </div>
+    
+    {/* Glowing ring effect */}
+    <div className="absolute inset-0 w-32 h-32 lg:w-48 lg:h-48 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-md -z-10"></div>
+  </div>
+</div>
+    <h2 className="ml-8 text-4xl lg:text-6xl font-bold mb-16 text-center bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+      About Me
+    </h2>
+</div>
+    
+    <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Left Column - Text Content */}
+      <div className="space-y-6">
+        <p className="text-xl lg:text-2xl text-gray-200 leading-relaxed">
+          I'm a passionate full-stack developer, with a big passion in AI who transforms ideas into 
+          elegant digital experiences.
+        </p>
+
+        <p className="text-lg text-gray-300 leading-relaxed">
+          With a keen eye for design and a love for clean code, I specialize in 
+          building modern web applications that not only look great but perform 
+          exceptionally. I believe in the power of technology to solve real-world 
+          problems and create meaningful connections.
+        </p>
+        
+        <p className="text-lg text-gray-300 leading-relaxed">
+          With a keen eye for design and a love for clean code, I specialize in 
+          building modern web applications that not only look great but perform 
+          exceptionally. I believe in the power of technology to solve real-world 
+          problems and create meaningful connections.
+        </p>
+        
+        <p className="text-lg text-gray-400 leading-relaxed">
+          When I'm not crafting code, you'll find me exploring new frameworks, 
+          contributing to open source projects, or seeking inspiration in nature 
+          and design.
+        </p>
+      </div>
+
+      {/* Right Column - Stats & Skills */}
+      <div className="space-y-8">
+        {/* Skills Section */}
+        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
+          <h3 className="text-xl font-semibold mb-4 text-center">Core Technologies</h3>
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              'React', 'TypeScript', 'Node.js', 'Python', 
+              'PostgreSQL', 'MongoDB', 'AWS', 'Docker',
+              'GraphQL', 'Next.js', 'Tailwind', 'Firebase'
+            ].map((skill) => (
+              <div 
+                key={skill} 
+                className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-white/10 rounded-lg py-2 px-3 text-center text-sm font-medium transition-all duration-300"
+              >
+                {skill}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
       {/* Projects Section */}
       <section id="projects" className="min-h-screen px-8 lg:px-16 py-20">
         <div className="max-w-6xl mx-auto">
@@ -84,35 +167,69 @@ const Portfolio: React.FC = () => {
               title:"BudgetBuddy AI assistant",
               description:"A ChatGPT budget assistant for all you financial needs!",
               link:" https://chatgpt.com/g/g-6872994953888191a4a589b3e995779c-budgetbuddy",
+              tools:"ChatGPT",
+              objective:"Creating a AI Chatbot thats fully focused on creating a budget and reaching your financial goals.",
+              process:"Prompting and iterating with a ChatGPT LLM to produce",
+              valueandrev:"",
               id:""
-            },{
+            },
+            {
+              title:"Newsletter: AI taking more jobs?",
+              description:"Join my newsletter",
+              link:"https://sasank.codes/newsletter",
+              tools:"",
+              objective:"",
+              process:"",
+              valueandrev:"",
+              id:""
+            }
+,{
               title:"AI Timeline",
               description:"Timeline diagram of AI with focus on AI Winters 🥶",
               link:"",
+              tools:"Lucidcharts",
+              objective:"Learn about the history of AI and how it grew to what we recognize it today.",
+              process:"Created with the help of Claude Sonnet 4 and cross reference with articles.",
+              valueandrev:"Simple way to learn about the history of AI.",
               id:"diagram"
             },{
               title:"Blog: My favorite machine learning models(CNN and Linear Regression)",
               description:"A small rant about CNN's and Linear Regression (and why I like them)",
               link:"",
+              tools:"Python, PyTorch",
+              objective:"Comparing and contrasting between CNN and linear Regression",
+              process:"Investigating the best machine learning models for different cases. Specifically what cases are  better for CNN and linear regression.",
+              valueandrev:"",
               id:"CNNVSLINEARREGRESSION"
             },{
               title:"Blog: Machine Learning Basics",
               description:"Answering some basic machine learning questions",
               link:"",
+              tools:"Python, Pytorch",
+              objective:"Providing a basis for machine learning concepts",
+              process:"",
+              valueandrev:"Easy to see, cheatsheet for machine learning concepts",
               id:"MACHINELEARNINGTECHNIQUES"
             },{
               title:"Blog: Dealing with Dirty Data",
               description:"Methods to deal with dirty data",
               link:"",
+              tools:"Python, Pytorch, Imputer",
+              objective:"Learning about data cleaning technologies.",
+              process:"",
+              valueandrev:"",
               id:"DATACLEANINGTECHNIQUES"
-            }
+            },
             ].map((project, index) => (
               <div key={index} onClick={()=>(openLinkOrScroll(project.id, project.link))} className="group bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-500 hover:scale-105 w-full">
                 <div className="p-6">
                   {project.link!=""?<h3 className="text-2xl font-bold mb-3"><FaExternalLinkSquareAlt className='w-5 h-5'/></h3>:null}
                   <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
                   <p className="text-gray-300 mb-4">{project.description}</p>
-                  <p className="text-gray-300 mb-4"></p>
+                  {project.tools!==""?<p className="text-gray-300 mb-4"><span className='font-bold'>{"Tools: "}</span>{project.tools}</p>:null}
+                  {project.objective!==""?<p className="text-gray-300 mb-4"><span className='font-bold'>{"Objectives: "}</span>{project.objective}</p>:null}
+                  {project.process!==""?<p className="text-gray-300 mb-4"><span className='font-bold'>{"Process: "}</span>{project.process}</p>:null}
+                  {project.valueandrev!==""?<p className="text-gray-300 mb-4"><span className='font-bold'>{"Value: "}</span>{project.valueandrev}</p>:null}
                 </div>
               </div>
             ))}
@@ -192,11 +309,10 @@ description:` <div>
         </div>`
 }
          ].map(data => {
-          return <div className="w-full bg-white/5 rounded-2xl px-4 py-8 mb-9" key={data.id} id={data.id}>
-              <h2 className="text-2xl lg:text-6xl font-bold mb-8 text-center">{data.title}</h2>
-<div dangerouslySetInnerHTML={{__html:data.description}} />
-            </div>
-          })
+return <div className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-8 py-16 mb-16 mx-4 hover:bg-white/10 transition-all duration-300" key={data.id} id={data.id}>
+  <h2 className="text-2xl lg:text-6xl font-bold mb-16 mt-4 text-center bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">{data.title}</h2>
+  <div className="prose prose-lg prose-invert max-w-none text-gray-300 leading-relaxed mx-8 my-12" dangerouslySetInnerHTML={{__html:data.description}} />
+</div>})
         }
       </section>
 
