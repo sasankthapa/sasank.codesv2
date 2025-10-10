@@ -373,12 +373,12 @@ const Portfolio: React.FC = () => {
         }
         ].map(data => {
           return <div className="max-w-3xl mx-auto leading-relaxed bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-8 py-16 mb-16 mx-4 hover:bg-white/10 transition-all duration-300" key={data.id} id={data.id}>
-            <h2 className="text-2xl lg:text-6xl font-bold mb-16 mt-4 text-center bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent"><a href=`${data.id}`>{data.title}<a></h2>
+            <h2 className="text-2xl lg:text-6xl font-bold mb-16 mt-4 text-center bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent"><a href={data.id}>{data.title}</a></h2>
             <div className="prose prose-lg prose-invert max-w-none text-gray-300 leading-relaxed mx-8 my-12" dangerouslySetInnerHTML={{ __html: data.description }} />
           </div>
         })
         }
-      </section>
+      </section >
 
 
     </div >
