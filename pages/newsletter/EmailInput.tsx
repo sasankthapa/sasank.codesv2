@@ -29,7 +29,7 @@ const EmailInput: React.FC<EmailInputProps> = ({
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
-    
+
     if (value.length > 0) {
       setIsValid(validateEmail(value));
     } else {
@@ -39,24 +39,24 @@ const EmailInput: React.FC<EmailInputProps> = ({
 
   const handleSubmit = async (e: React.MouseEvent | React.KeyboardEvent) => {
     e.preventDefault();
-    
+
     if (!validateEmail(email)) {
       setIsValid(false);
       return;
     }
 
     setIsSubmitting(true);
-    
+
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     if (onSubmit) {
       onSubmit(email);
     }
-    
+
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
+
     // Reset after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
@@ -95,13 +95,12 @@ const EmailInput: React.FC<EmailInputProps> = ({
             value={email}
             onChange={handleEmailChange}
             placeholder={placeholder}
-            className={`w-full px-4 py-3 border-2 rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black/20 transition-all duration-300 ${
-              isValid === false 
-                ? 'border-red-300 bg-red-50' 
-                : isValid === true 
-                ? 'border-green-300 bg-green-50' 
+            className={`w-full px-4 py-3 border-2 rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black/20 transition-all duration-300 ${isValid === false
+              ? 'border-red-300 bg-red-50'
+              : isValid === true
+                ? 'border-green-300 bg-green-50'
                 : 'border-gray-300 bg-gray-50 focus:border-black'
-            }`}
+              }`}
             disabled={isSubmitting}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
@@ -110,7 +109,7 @@ const EmailInput: React.FC<EmailInputProps> = ({
               }
             }}
           />
-          
+
           {/* Validation Icons */}
           {isValid !== null && (
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -126,7 +125,6 @@ const EmailInput: React.FC<EmailInputProps> = ({
         {/* Error Message */}
         {isValid === false && (
           <p className="text-sm text-red-600 flex items-center gap-2">
-            <AlertCircle className="w-4 h-4" />
             Please enter a valid email address
           </p>
         )}
@@ -135,11 +133,10 @@ const EmailInput: React.FC<EmailInputProps> = ({
         <button
           onClick={handleSubmit}
           disabled={!isValid || isSubmitting}
-          className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
-            isValid && !isSubmitting
-              ? 'bg-black text-white hover:bg-gray-800 hover:scale-105'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-          }`}
+          className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${isValid && !isSubmitting
+            ? 'bg-black text-white hover:bg-gray-800 hover:scale-105'
+            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
         >
           {isSubmitting ? (
             <>
