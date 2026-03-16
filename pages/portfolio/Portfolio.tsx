@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import profileImage from '../../public/static/images/profile.jpg'
 import { FaArrowDown, FaArrowUp, FaExternalLinkAlt, FaExternalLinkSquareAlt, FaGithub, FaLinkedin, FaMailBulk, FaMailchimp } from 'react-icons/fa';
 import Image from 'next/image';
-import { mlModels, mlSections } from './mlModelsData';
+import { mlModels, mlSections } from '../../lib/mlModelsData';
 
 const Portfolio: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
