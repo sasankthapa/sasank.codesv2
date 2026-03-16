@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import profileImage from '../../public/static/images/profile.jpg'
 import { FaArrowDown, FaArrowUp, FaExternalLinkAlt, FaExternalLinkSquareAlt, FaGithub, FaLinkedin, FaMailBulk, FaMailchimp } from 'react-icons/fa';
 import Image from 'next/image';
+import { mlModels, mlSections } from './mlModelsData';
 
 const Portfolio: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [visibleTop, setVisibleGoToTop] = useState(false)
+  const [visibleTop, setVisibleGoToTop] = useState(false);
+  const [expandedModel, setExpandedModel] = useState<number | null>(null);
 
 
   const scrollToSection = (sectionId: string) => {
@@ -62,6 +64,12 @@ const Portfolio: React.FC = () => {
             className="text-gray-300 hover:text-white transition-colors duration-300 text-lg font-medium"
           >
             About Me
+          </button>
+          <button
+            onClick={() => openLinkOrScroll('ml-models', '')}
+            className="text-gray-300 hover:text-white transition-colors duration-300 text-lg font-medium"
+          >
+            ML Models
           </button>
           <button
             onClick={() => openLinkOrScroll('projects', '')}
@@ -158,6 +166,116 @@ const Portfolio: React.FC = () => {
           </div>
         </div>
       </section>
+      {/* Machine Learning Models Section */}
+      <section id="ml-models" className="px-8 lg:px-16 pt-20 pb-36">
+        <div className="max-w-6xl mx-auto">
+          <a href="#ml-models">
+            <h2 className="text-4xl lg:text-6xl font-bold mb-4 text-center bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent hover:opacity-80 transition-opacity duration-200">
+              Machine Learning Models
+            </h2>
+          </a>
+          <p className="text-gray-400 text-center mb-16 text-lg">
+            Click any card to explore details
+          </p>
+
+          {mlSections.map((sec) => {
+            const sectionModels = mlModels.filter((m) => m.section === sec.id);
+            return (
+              <div key={sec.id} className="mb-16">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-white mb-1">{sec.label}</h3>
+                  <p className="text-gray-400 text-sm">{sec.description}</p>
+                </div>
+                <div className="grid lg:grid-cols-3 gap-6">
+                  {sectionModels.map((model) => {
+                    const index = mlModels.indexOf(model);
+              const isExpanded = expandedModel === index;
+              return (
+                <div
+                  key={model.id}
+                  onClick={() => setExpandedModel(isExpanded ? null : index)}
+                  className={`group cursor-pointer bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10
+                    ${isExpanded ? 'lg:col-span-3 transition-all duration-500' : 'lg:col-span-1'}
+                  `}
+                >
+                  {/* Card Header — always visible */}
+                  <div className="p-6">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <span className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-2 block">
+                          {model.category}
+                        </span>
+                        <h3 className="text-xl font-bold mb-1 transition-colors duration-300 group-hover:text-purple-200">
+                          {model.name}
+                        </h3>
+                        <p className="text-gray-400 text-sm">{model.tagline}</p>
+                      </div>
+                      <span className={`text-purple-400 text-lg transition-transform duration-300 shrink-0 mt-1 ${isExpanded ? 'rotate-45' : ''}`}>
+                        +
+                      </span>
+                    </div>
+
+                    {/* Expanded content — grid-rows trick for smooth open/close */}
+                    <div className={`grid ${isExpanded ? 'grid-rows-[1fr] mt-6 opacity-100 transition-all duration-500' : 'grid-rows-[0fr] opacity-0'}`}>
+                      <div className="overflow-hidden min-h-0">
+                      <p className="text-gray-300 leading-relaxed mb-6">{model.description}</p>
+
+                      <div className="grid gap-6 lg:grid-cols-3">
+                        <div>
+                          <h4 className="text-sm font-semibold text-purple-300 uppercase tracking-wide mb-3">Use Cases</h4>
+                          <ul className="space-y-2">
+                            {model.useCases.map((uc, i) => (
+                              <li key={i} className="text-gray-300 text-sm flex gap-2">
+                                <span className="text-pink-400 shrink-0">▸</span>
+                                {uc}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-semibold text-purple-300 uppercase tracking-wide mb-3">Strengths</h4>
+                          <ul className="space-y-2">
+                            {model.strengths.map((s, i) => (
+                              <li key={i} className="text-gray-300 text-sm flex gap-2">
+                                <span className="text-green-400 shrink-0">✓</span>
+                                {s}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-semibold text-purple-300 uppercase tracking-wide mb-3">Limitations</h4>
+                          <ul className="space-y-2 mb-4">
+                            {model.limitations.map((l, i) => (
+                              <li key={i} className="text-gray-300 text-sm flex gap-2">
+                                <span className="text-red-400 shrink-0">✗</span>
+                                {l}
+                              </li>
+                            ))}
+                          </ul>
+                          <h4 className="text-sm font-semibold text-purple-300 uppercase tracking-wide mb-3">Tools</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {model.exampleTools.map((tool, i) => (
+                              <span key={i} className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-white/10 rounded-lg px-2 py-1 text-xs font-medium text-gray-200">
+                                {tool}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  );
+                })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       {/* Projects Section */}
       <section id="projects" className="min-h-screen px-8 lg:px-16 py-20">
         <div className="max-w-6xl mx-auto">
