@@ -201,14 +201,29 @@ const Portfolio: React.FC = () => {
                   {/* Card Header — always visible */}
                   <div className="p-6">
                     <div className="flex items-start justify-between gap-4">
-                      <div>
+                      <div className="flex-1 min-w-0">
                         <span className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-2 block">
                           {model.category}
                         </span>
                         <h3 className="text-xl font-bold mb-1 transition-colors duration-300 group-hover:text-purple-200">
                           {model.name}
                         </h3>
-                        <p className="text-gray-400 text-sm">{model.tagline}</p>
+                        <p className="text-gray-400 text-sm mb-3">{model.tagline}</p>
+                        {/* Algorithm type + domains — always visible */}
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          <span className={`text-xs font-semibold px-2 py-1 rounded-md border ${
+                            model.algorithmType === 'Supervised' ? 'bg-blue-500/10 border-blue-400/30 text-blue-300' :
+                            model.algorithmType === 'Unsupervised' ? 'bg-amber-500/10 border-amber-400/30 text-amber-300' :
+                            'bg-pink-500/10 border-pink-400/30 text-pink-300'
+                          }`}>
+                            {model.algorithmType}
+                          </span>
+                          {model.domains.map((d) => (
+                            <span key={d} className="text-xs px-2 py-1 rounded-md border bg-white/5 border-white/10 text-gray-300">
+                              {d}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                       <span className={`text-purple-400 text-lg transition-transform duration-300 shrink-0 mt-1 ${isExpanded ? 'rotate-45' : ''}`}>
                         +

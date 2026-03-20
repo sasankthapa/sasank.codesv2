@@ -1,10 +1,14 @@
 export type MLSection = 'supervised' | 'unsupervised' | 'deep-learning';
 
+export type AppDomain = 'Tabular Data' | 'Computer Vision' | 'NLP' | 'Generative AI' | 'Time Series';
+
 export interface MLModel {
   id: string;
   name: string;
   category: string;
   section: MLSection;
+  algorithmType: 'Supervised' | 'Unsupervised' | 'Self-Supervised';
+  domains: AppDomain[];
   tagline: string;
   description: string;
   useCases: string[];
@@ -24,6 +28,8 @@ export const mlModels: MLModel[] = [
     id: "linear-regression",
     name: "Linear Regression",
     section: "supervised" as const,
+    algorithmType: "Supervised",
+    domains: ["Tabular Data"],
     category: "Supervised Learning",
     tagline: "The classic model for predicting continuous values",
     description:
@@ -49,6 +55,8 @@ export const mlModels: MLModel[] = [
     id: "logistic-regression",
     name: "Logistic Regression",
     section: "supervised" as const,
+    algorithmType: "Supervised",
+    domains: ["Tabular Data", "NLP"],
     category: "Supervised Learning",
     tagline: "Linear model adapted for classification",
     description:
@@ -74,6 +82,8 @@ export const mlModels: MLModel[] = [
     id: "decision-tree",
     name: "Decision Tree",
     section: "supervised" as const,
+    algorithmType: "Supervised",
+    domains: ["Tabular Data"],
     category: "Supervised Learning",
     tagline: "Hierarchical if-else rules made learnable",
     description:
@@ -99,6 +109,8 @@ export const mlModels: MLModel[] = [
     id: "random-forest",
     name: "Random Forest",
     section: "supervised" as const,
+    algorithmType: "Supervised",
+    domains: ["Tabular Data"],
     category: "Ensemble Learning",
     tagline: "Wisdom of the crowd applied to decision trees",
     description:
@@ -124,6 +136,8 @@ export const mlModels: MLModel[] = [
     id: "svm",
     name: "Support Vector Machine (SVM)",
     section: "supervised" as const,
+    algorithmType: "Supervised",
+    domains: ["Tabular Data", "Computer Vision", "NLP"],
     category: "Supervised Learning",
     tagline: "Finding the best boundary between classes",
     description:
@@ -149,6 +163,8 @@ export const mlModels: MLModel[] = [
     id: "k-means",
     name: "K-Means Clustering",
     section: "unsupervised" as const,
+    algorithmType: "Unsupervised",
+    domains: ["Tabular Data", "Computer Vision"],
     category: "Unsupervised Learning",
     tagline: "Grouping data by similarity without labels",
     description:
@@ -174,6 +190,8 @@ export const mlModels: MLModel[] = [
     id: "pca",
     name: "Principal Component Analysis (PCA)",
     section: "unsupervised" as const,
+    algorithmType: "Unsupervised",
+    domains: ["Tabular Data", "Computer Vision", "NLP"],
     category: "Unsupervised Learning",
     tagline: "Compressing high-dimensional data while preserving structure",
     description:
@@ -199,6 +217,8 @@ export const mlModels: MLModel[] = [
     id: "cnn",
     name: "Convolutional Neural Network (CNN)",
     section: "deep-learning" as const,
+    algorithmType: "Supervised",
+    domains: ["Computer Vision"],
     category: "Deep Learning",
     tagline: "The gold standard for visual data",
     description:
@@ -224,6 +244,8 @@ export const mlModels: MLModel[] = [
     id: "rnn-lstm",
     name: "RNN / LSTM",
     section: "deep-learning" as const,
+    algorithmType: "Supervised",
+    domains: ["NLP", "Time Series"],
     category: "Deep Learning",
     tagline: "Memory-driven models for sequential data",
     description:
@@ -249,6 +271,8 @@ export const mlModels: MLModel[] = [
     id: "llm",
     name: "Large Language Models (LLMs)",
     section: "deep-learning" as const,
+    algorithmType: "Self-Supervised",
+    domains: ["NLP", "Generative AI"],
     category: "Generative AI / Deep Learning",
     tagline: "The foundation of modern AI — trained on the internet",
     description:
