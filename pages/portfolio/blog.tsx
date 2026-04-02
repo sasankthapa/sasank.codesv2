@@ -98,7 +98,6 @@ const genAITopics = [
 
 const BlogPage: React.FC = () => {
   const [expandedModel, setExpandedModel] = useState<number | null>(null);
-  const [expandedTopic, setExpandedTopic] = useState<string | null>(null);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -279,43 +278,36 @@ const BlogPage: React.FC = () => {
             How LLMs are trained, what they do, and why they work
           </p>
 
-          <div className="space-y-6">
-            {genAITopics.map((topic) => {
-              const isTopicOpen = expandedTopic === topic.id;
+          <div className="grid lg:grid-cols-3 gap-8 items-start">
+            {genAITopics.map((topic, ti) => {
+              const accents = [
+                { border: 'border-indigo-500/40', badge: 'bg-indigo-500/20 text-indigo-300', dot: 'bg-indigo-400', num: 'text-indigo-400' },
+                { border: 'border-purple-500/40', badge: 'bg-purple-500/20 text-purple-300', dot: 'bg-purple-400', num: 'text-purple-400' },
+                { border: 'border-pink-500/40',   badge: 'bg-pink-500/20 text-pink-300',   dot: 'bg-pink-400',   num: 'text-pink-400'   },
+              ];
+              const a = accents[ti];
               return (
-                <div
-                  key={topic.id}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-colors duration-300"
-                >
-                  {/* Topic Header */}
-                  <button
-                    className="w-full p-6 flex items-center justify-between gap-4 cursor-pointer text-left"
-                    onClick={() => setExpandedTopic(isTopicOpen ? null : topic.id)}
-                  >
-                    <div>
-                      <span className="text-sm font-semibold uppercase tracking-widest text-purple-400 mb-1 block">
-                        Generative AI
-                      </span>
-                      <h3 className="text-2xl font-bold text-white">{topic.title}</h3>
-                      <p className="text-gray-400 text-base mt-1">{topic.tagline}</p>
-                    </div>
-                    <span className={`text-purple-400 text-xl transition-transform duration-300 shrink-0 ${isTopicOpen ? 'rotate-45' : ''}`}>
-                      +
+                <div key={topic.id} className={`bg-white/5 backdrop-blur-sm border ${a.border} rounded-2xl overflow-hidden flex flex-col`}>
+                  {/* Card Header */}
+                  <div className="p-6 pb-4 border-b border-white/10">
+                    <span className={`inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 ${a.badge}`}>
+                      Generative AI
                     </span>
-                  </button>
+                    <h3 className="text-xl font-bold text-white leading-snug mb-1">{topic.title}</h3>
+                    <p className="text-gray-400 text-sm">{topic.tagline}</p>
+                  </div>
 
-                  {/* Topic Content */}
-                  <div className={`grid ${isTopicOpen ? 'grid-rows-[1fr] transition-all duration-500' : 'grid-rows-[0fr]'}`}>
-                    <div className="overflow-hidden min-h-0">
-                      <div className="px-6 pb-8 space-y-6">
-                        {topic.content.map((item) => (
-                          <div key={item.heading}>
-                            <h4 className="text-lg font-bold text-purple-200 mb-2">{item.heading}</h4>
-                            <p className="text-gray-300 text-base leading-relaxed">{item.body}</p>
-                          </div>
-                        ))}
+                  {/* Content Items */}
+                  <div className="p-6 space-y-5">
+                    {topic.content.map((item, i) => (
+                      <div key={item.heading} className="flex gap-4">
+                        <span className={`text-sm font-bold mt-0.5 shrink-0 w-5 text-right ${a.num}`}>{i + 1}</span>
+                        <div>
+                          <h4 className="text-base font-semibold text-white mb-1">{item.heading}</h4>
+                          <p className="text-gray-400 text-sm leading-relaxed">{item.body}</p>
+                        </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               );
