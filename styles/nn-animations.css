@@ -1,0 +1,73 @@
+/* Neural network diagram animations */
+
+@keyframes nn-glow-ring {
+
+  0%,
+  100% {
+    stroke-opacity: 0.2;
+  }
+
+  50% {
+    stroke-opacity: 0.8;
+  }
+}
+
+@keyframes nn-sel-ring {
+
+  0%,
+  100% {
+    stroke-opacity: 0.6;
+  }
+
+  50% {
+    stroke-opacity: 1;
+  }
+}
+
+@keyframes nn-error-ring {
+
+  0%,
+  100% {
+    stroke-opacity: 0.3;
+  }
+
+  50% {
+    stroke-opacity: 0.9;
+  }
+}
+
+@keyframes nn-layer-bg {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes nn-conn-sel {
+
+  0%,
+  100% {
+    stroke-opacity: 0.8;
+  }
+
+  50% {
+    stroke-opacity: 1;
+  }
+}
+
+.nn-neuron-hover {
+  cursor: pointer;
+}
+
+.nn-conn-hit {
+  cursor: pointer;
+}
+
+.nn-label-click {
+  cursor: pointer;
+}

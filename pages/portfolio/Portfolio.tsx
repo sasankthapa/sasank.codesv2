@@ -4,6 +4,7 @@ import profileImage from '../../public/static/images/profile.jpg'
 import { FaArrowDown, FaArrowUp, FaExternalLinkAlt, FaExternalLinkSquareAlt, FaGithub, FaLinkedin, FaMailBulk, FaMailchimp } from 'react-icons/fa';
 import Image from 'next/image';
 import { mlModels, mlSections } from '../../lib/mlModelsData';
+import NeuralNetworkSection from '../../components/NeuralNetworkSection';
 
 const Portfolio: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -70,6 +71,12 @@ const Portfolio: React.FC = () => {
             className="text-gray-300 hover:text-white transition-colors duration-300 text-lg font-medium"
           >
             ML Models
+          </button>
+          <button
+            onClick={() => openLinkOrScroll('neural-networks', '')}
+            className="text-gray-300 hover:text-white transition-colors duration-300 text-lg font-medium"
+          >
+            Neural Networks
           </button>
           <button
             onClick={() => openLinkOrScroll('projects', '')}
@@ -290,6 +297,9 @@ const Portfolio: React.FC = () => {
           })}
         </div>
       </section>
+
+      {/* Neural Networks Section */}
+      <NeuralNetworkSection />
 
       {/* Projects Section */}
       <section id="projects" className="min-h-screen px-8 lg:px-16 py-20">

@@ -1,4 +1,5 @@
 import 'tailwindcss/tailwind.css'
+import '../styles/nn-animations.css'
 import type { AppProps } from 'next/app'
 import {useRouter} from 'next/router'
 import {useEffect} from 'react'
