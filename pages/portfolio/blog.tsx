@@ -287,7 +287,7 @@ const BlogPage: React.FC = () => {
               ];
               const a = accents[ti];
               return (
-                <div key={topic.id} className={`group bg-white/5 backdrop-blur-sm border ${a.border} rounded-2xl overflow-hidden flex flex-col transition-transform duration-300 ease-out hover:scale-[1.04] hover:z-10 relative hover:bg-white/10`}>
+                <div key={topic.id} className={`group cursor-default bg-white/5 backdrop-blur-sm border ${a.border} rounded-2xl overflow-hidden flex flex-col transition-transform duration-300 ease-out hover:scale-[1.04] hover:z-10 relative hover:bg-white/10`}>
                   {/* Card Header */}
                   <div className="p-6 pb-4 border-b border-white/10">
                     <span className={`inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 ${a.badge}`}>
@@ -298,7 +298,7 @@ const BlogPage: React.FC = () => {
                   </div>
 
                   {/* Content Items */}
-                  <div className="p-6 space-y-5">
+                  <div className="p-6 space-y-5 select-none">
                     {topic.content.map((item, i) => (
                       <div key={item.heading} className="flex gap-4">
                         <span className={`text-sm font-bold mt-0.5 shrink-0 w-5 text-right transition-all duration-300 group-hover:text-base ${a.num}`}>{i + 1}</span>
