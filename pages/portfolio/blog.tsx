@@ -161,6 +161,11 @@ const BlogPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="px-8 lg:px-16">
+        <div className="max-w-6xl mx-auto border-t border-white/10" />
+      </div>
+
       {/* Neural Networks Section */}
       <NeuralNetworkSection />
     </div>
