@@ -99,7 +99,6 @@ const genAITopics = [
 const BlogPage: React.FC = () => {
   const [expandedModel, setExpandedModel] = useState<number | null>(null);
   const [expandedTopic, setExpandedTopic] = useState<string | null>(null);
-  const [expandedTopicSection, setExpandedTopicSection] = useState<string | null>(null);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -294,13 +293,13 @@ const BlogPage: React.FC = () => {
                     onClick={() => setExpandedTopic(isTopicOpen ? null : topic.id)}
                   >
                     <div>
-                      <span className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-1 block">
+                      <span className="text-sm font-semibold uppercase tracking-widest text-purple-400 mb-1 block">
                         Generative AI
                       </span>
-                      <h3 className="text-xl font-bold text-white">{topic.title}</h3>
-                      <p className="text-gray-400 text-sm mt-1">{topic.tagline}</p>
+                      <h3 className="text-2xl font-bold text-white">{topic.title}</h3>
+                      <p className="text-gray-400 text-base mt-1">{topic.tagline}</p>
                     </div>
-                    <span className={`text-purple-400 text-lg transition-transform duration-300 shrink-0 ${isTopicOpen ? 'rotate-45' : ''}`}>
+                    <span className={`text-purple-400 text-xl transition-transform duration-300 shrink-0 ${isTopicOpen ? 'rotate-45' : ''}`}>
                       +
                     </span>
                   </button>
@@ -308,32 +307,13 @@ const BlogPage: React.FC = () => {
                   {/* Topic Content */}
                   <div className={`grid ${isTopicOpen ? 'grid-rows-[1fr] transition-all duration-500' : 'grid-rows-[0fr]'}`}>
                     <div className="overflow-hidden min-h-0">
-                      <div className="px-6 pb-6 space-y-3">
-                        {topic.content.map((item) => {
-                          const key = `${topic.id}-${item.heading}`;
-                          const isSectionOpen = expandedTopicSection === key;
-                          return (
-                            <div
-                              key={key}
-                              className="bg-white/5 border border-white/10 rounded-xl overflow-hidden"
-                            >
-                              <button
-                                className="w-full px-5 py-4 flex items-center justify-between gap-4 text-left cursor-pointer hover:bg-white/5 transition-colors duration-200"
-                                onClick={() => setExpandedTopicSection(isSectionOpen ? null : key)}
-                              >
-                                <span className="font-semibold text-white">{item.heading}</span>
-                                <span className={`text-purple-400 text-base transition-transform duration-300 shrink-0 ${isSectionOpen ? 'rotate-45' : ''}`}>
-                                  +
-                                </span>
-                              </button>
-                              <div className={`grid ${isSectionOpen ? 'grid-rows-[1fr] transition-all duration-500' : 'grid-rows-[0fr]'}`}>
-                                <div className="overflow-hidden min-h-0">
-                                  <p className="px-5 pb-4 text-gray-300 text-sm leading-relaxed">{item.body}</p>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
+                      <div className="px-6 pb-8 space-y-6">
+                        {topic.content.map((item) => (
+                          <div key={item.heading}>
+                            <h4 className="text-lg font-bold text-purple-200 mb-2">{item.heading}</h4>
+                            <p className="text-gray-300 text-base leading-relaxed">{item.body}</p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
