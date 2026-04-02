@@ -9,6 +9,13 @@ const Portfolio: React.FC = () => {
   const [visibleTop, setVisibleGoToTop] = useState(false);
 
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === '#ml-models' || hash === '#neural-networks' || hash === '#generative-ai') {
+      window.location.replace(`/portfolio/blog${hash}`);
+    }
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -173,7 +180,7 @@ const Portfolio: React.FC = () => {
           <p className="text-gray-400 text-center mb-16 text-lg">
             Deep dives into machine learning models and neural network concepts
           </p>
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-3 gap-8">
             <Link href="/portfolio/blog#ml-models" className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-purple-400/40">
               <span className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-3 block">Deep Dive</span>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-purple-200 transition-colors duration-300">Machine Learning Models</h3>
@@ -183,6 +190,11 @@ const Portfolio: React.FC = () => {
               <span className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-3 block">Interactive</span>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-pink-200 transition-colors duration-300">Neural Networks</h3>
               <p className="text-gray-400 text-sm leading-relaxed">An interactive visual diagram of a neural network. Click neurons, connections, and layers to explore components like weights, activation functions, and backpropagation.</p>
+            </Link>
+            <Link href="/portfolio/blog#generative-ai" className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-indigo-400/40">
+              <span className="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-3 block">Blog Post</span>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-indigo-200 transition-colors duration-300">Generative AI</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">How LLMs are trained, what ChatGPT is actually doing under the hood, and why token prediction produces something that feels like intelligence.</p>
             </Link>
           </div>
         </div>
