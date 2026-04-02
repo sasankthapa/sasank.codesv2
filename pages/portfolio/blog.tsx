@@ -287,24 +287,24 @@ const BlogPage: React.FC = () => {
               ];
               const a = accents[ti];
               return (
-                <div key={topic.id} className={`bg-white/5 backdrop-blur-sm border ${a.border} rounded-2xl overflow-hidden flex flex-col`}>
+                <div key={topic.id} className={`group bg-white/5 backdrop-blur-sm border ${a.border} rounded-2xl overflow-hidden flex flex-col transition-transform duration-300 ease-out hover:scale-[1.04] hover:z-10 relative hover:bg-white/10`}>
                   {/* Card Header */}
                   <div className="p-6 pb-4 border-b border-white/10">
                     <span className={`inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 ${a.badge}`}>
                       Generative AI
                     </span>
-                    <h3 className="text-xl font-bold text-white leading-snug mb-1">{topic.title}</h3>
-                    <p className="text-gray-400 text-sm">{topic.tagline}</p>
+                    <h3 className="text-xl font-bold text-white leading-snug mb-1 transition-all duration-300 group-hover:text-2xl">{topic.title}</h3>
+                    <p className="text-gray-400 text-sm transition-all duration-300 group-hover:text-base">{topic.tagline}</p>
                   </div>
 
                   {/* Content Items */}
                   <div className="p-6 space-y-5">
                     {topic.content.map((item, i) => (
                       <div key={item.heading} className="flex gap-4">
-                        <span className={`text-sm font-bold mt-0.5 shrink-0 w-5 text-right ${a.num}`}>{i + 1}</span>
+                        <span className={`text-sm font-bold mt-0.5 shrink-0 w-5 text-right transition-all duration-300 group-hover:text-base ${a.num}`}>{i + 1}</span>
                         <div>
-                          <h4 className="text-base font-semibold text-white mb-1">{item.heading}</h4>
-                          <p className="text-gray-400 text-sm leading-relaxed">{item.body}</p>
+                          <h4 className="text-base font-semibold text-white mb-1 transition-all duration-300 group-hover:text-lg">{item.heading}</h4>
+                          <p className="text-gray-400 text-sm leading-relaxed transition-all duration-300 group-hover:text-base">{item.body}</p>
                         </div>
                       </div>
                     ))}
