@@ -63,18 +63,6 @@ const Portfolio: React.FC = () => {
           >
             About Me
           </button>
-          <Link
-            href="/portfolio/blog#ml-models"
-            className="text-gray-300 hover:text-white transition-colors duration-300 text-lg font-medium"
-          >
-            ML Models
-          </Link>
-          <Link
-            href="/portfolio/blog#neural-networks"
-            className="text-gray-300 hover:text-white transition-colors duration-300 text-lg font-medium"
-          >
-            Neural Networks
-          </Link>
           <button
             onClick={() => openLinkOrScroll('blog', '')}
             className="text-gray-300 hover:text-white transition-colors duration-300 text-lg font-medium"
