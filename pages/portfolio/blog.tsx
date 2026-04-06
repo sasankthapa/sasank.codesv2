@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaChevronDown } from 'react-icons/fa';
 import { mlModels, mlSections } from '../../lib/mlModelsData';
 import NeuralNetworkSection from '../../components/NeuralNetworkSection';
 
@@ -91,6 +91,105 @@ const genAITopics = [
       {
         heading: 'Why It Feels Like Understanding',
         body: 'The internal representations learned during training encode semantic relationships so richly that the model generalizes far beyond its training data. It can solve novel analogies, write code in languages it saw rarely, and reason about hypotheticals — not because it memorized answers, but because it learned the deep structure of human knowledge.',
+      },
+    ],
+  },
+];
+
+const xaiTopics = [
+  {
+    id: 'xai-importance',
+    title: 'Explainable AI & Its Importance',
+    tagline: 'Why transparency in AI is no longer optional',
+    accent: { border: 'border-emerald-500/40', badge: 'bg-emerald-500/20 text-emerald-300', num: 'text-emerald-400', bar: 'bg-emerald-500/30' },
+    content: [
+      {
+        heading: 'What is XAI?',
+        body: 'XAI refers to methods that make AI decisions understandable, allowing users and regulators to trace why a model produced a given output.',
+      },
+      {
+        heading: 'Trust & Accountability',
+        body: "Without explainability there is no accountability loop: errors go unchallenged, biases go undetected, and public trust erodes.",
+      },
+      {
+        heading: 'Regulatory Pressure',
+        body: "The EU AI Act and GDPR's right to explanation require high-risk AI systems to justify their decisions, making XAI a legal necessity.",
+      },
+      {
+        heading: 'The Scale Problem',
+        body: 'GPT-4, Claude, Gemini, and LLaMA each contain hundreds of billions of parameters, making it impossible to trace any specific output back to its cause.',
+      },
+    ],
+  },
+  {
+    id: 'xai-challenges',
+    title: 'Challenges in Explainability',
+    tagline: 'The obstacles between black-box models and human understanding',
+    accent: { border: 'border-amber-500/40', badge: 'bg-amber-500/20 text-amber-300', num: 'text-amber-400', bar: 'bg-amber-500/30' },
+    content: [
+      {
+        heading: 'Model Complexity',
+        body: "Billions of parameters and hundreds of parallel attention heads create emergent behaviors that can't be reduced to simple rules.",
+      },
+      {
+        heading: 'Accuracy vs. Interpretability',
+        body: 'Choosing between a 92%-accurate black box and an 85%-accurate explainable model makes the business case for transparency genuinely hard to justify.',
+      },
+      {
+        heading: 'Misleading Attention Weights',
+        body: "High attention on a token doesn't mean it caused the output, so attention weights are an unreliable proxy for model reasoning.",
+      },
+      {
+        heading: 'Post-hoc vs. Intrinsic',
+        body: 'Post-hoc explanations are approximations added after the fact and are never fully faithful to the actual computation inside the model.',
+      },
+    ],
+  },
+  {
+    id: 'xai-metrics',
+    title: 'Validation & Performance Metrics',
+    tagline: 'How we measure whether explanations and models can be trusted',
+    accent: { border: 'border-sky-500/40', badge: 'bg-sky-500/20 text-sky-300', num: 'text-sky-400', bar: 'bg-sky-500/30' },
+    content: [
+      {
+        heading: 'SHAP Values',
+        body: 'SHAP assigns each input feature a game-theory-grounded contribution score, showing exactly how much it shifted a prediction up or down.',
+      },
+      {
+        heading: 'Faithfulness & Completeness',
+        body: "Faithfulness measures whether an explanation reflects real model behavior, while completeness checks that it accounts for the full prediction.",
+      },
+      {
+        heading: 'Benchmarks: GLUE, BIG-Bench, HELM',
+        body: "Stanford's HELM evaluates models across 42 scenarios and 7 metrics, providing a multi-dimensional framework for accountability.",
+      },
+      {
+        heading: 'Human Evaluation',
+        body: 'Having people rate whether an explanation actually helps them understand a decision remains the gold standard for validating XAI quality.',
+      },
+    ],
+  },
+  {
+    id: 'xai-solutions',
+    title: 'Current Solutions & Techniques',
+    tagline: 'What industry leaders are doing to improve explainability',
+    accent: { border: 'border-violet-500/40', badge: 'bg-violet-500/20 text-violet-300', num: 'text-violet-400', bar: 'bg-violet-500/30' },
+    content: [
+      {
+        heading: 'LIME',
+        body: "LIME approximates a complex model around a single prediction using a simpler one, identifying which features mattered most for that specific output.",
+      },
+      {
+        heading: 'Constitutional AI (Anthropic)',
+        body: "Anthropic trains Claude against an explicit set of principles it uses to self-critique, creating a traceable path from stated values to model behavior.",
+      },
+      {
+        heading: 'Mechanistic Interpretability',
+        body: "Anthropic's Monosemanticity research found individual neurons in Claude that activate for distinct human-interpretable concepts, a major step toward causal transparency.",
+      },
+      {
+        heading: 'Chain-of-Thought Reasoning',
+        body: "Prompting models to reason step-by-step makes their intermediate thinking visible and auditable, improving reviewability even if it isn't full explainability.",
       },
     ],
   },
@@ -260,6 +359,65 @@ const BlogPage: React.FC = () => {
 
       {/* Neural Networks Section */}
       <NeuralNetworkSection />
+
+      {/* Divider */}
+      <div className="px-8 lg:px-16">
+        <div className="max-w-6xl mx-auto border-t border-white/10" />
+      </div>
+
+      {/* Explainable AI Section */}
+      <section id="explainable-ai" className="px-8 lg:px-16 pt-20 pb-36">
+        <div className="max-w-6xl mx-auto">
+          <a href="#explainable-ai">
+            <h2 className="text-4xl lg:text-6xl font-bold mb-4 text-center bg-gradient-to-r from-white via-emerald-200 to-sky-200 bg-clip-text text-transparent hover:opacity-80 transition-opacity duration-200">
+              Explainable AI
+            </h2>
+          </a>
+          <p className="text-gray-400 text-center mb-16 text-lg">
+            Why AI transparency matters, the challenges of making models legible, and how the industry is responding
+          </p>
+
+          <div className="grid lg:grid-cols-2 gap-14">
+            {xaiTopics.map((topic) => {
+              const a = topic.accent;
+              return (
+                <div
+                  key={topic.id}
+                  id={topic.id}
+                  className={`bg-white/5 backdrop-blur-sm border ${a.border} rounded-2xl overflow-hidden flex flex-col hover:bg-white/10 hover:scale-[1.02] transition-transform duration-300`}
+                >
+                  {/* Card Header */}
+                  <div className="px-6 pt-6 pb-4 border-b border-white/10">
+                    <h3 className="text-xl font-bold text-white leading-snug mb-1">{topic.title}</h3>
+                    <p className="text-gray-400 text-sm">{topic.tagline}</p>
+                  </div>
+
+                  {/* Content Items */}
+                  <div className="p-6 space-y-5 select-text">
+                    {topic.content.map((item, i) => (
+                      <div key={item.heading} className="group/item flex gap-4 cursor-default">
+                        <span className={`text-sm font-bold mt-0.5 shrink-0 w-5 text-right transition-colors duration-200 group-hover/item:text-white ${a.num}`}>{i + 1}</span>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between gap-2 mb-1">
+                            <h4 className="text-base font-semibold text-white">{item.heading}</h4>
+                            <FaChevronDown className={`w-3 h-3 shrink-0 transition-transform duration-500 group-hover/item:rotate-180 ${a.num}`} />
+                          </div>
+                          <div className="grid grid-rows-[0fr] group-hover/item:grid-rows-[1fr] transition-[grid-template-rows] duration-500">
+                            <div className="overflow-hidden min-h-0">
+                              <p className="text-gray-300 text-sm leading-relaxed pt-1">{item.body}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
 
       {/* Divider */}
       <div className="px-8 lg:px-16">
