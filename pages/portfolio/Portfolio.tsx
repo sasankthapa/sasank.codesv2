@@ -11,7 +11,7 @@ const Portfolio: React.FC = () => {
 
   useEffect(() => {
     const hash = window.location.hash;
-    if (hash === '#ml-models' || hash === '#neural-networks' || hash === '#generative-ai' || hash === '#explainable-ai') {
+    if (hash === '#ml-models' || hash === '#neural-networks' || hash === '#generative-ai' || hash === '#explainable-ai' || hash === '#models-explainability') {
       window.location.replace(`/portfolio/blog${hash}`);
     }
   }, []);
@@ -200,6 +200,11 @@ const Portfolio: React.FC = () => {
               <span className="text-xs font-semibold uppercase tracking-widest text-emerald-400 mb-3 block">Research Deep Dive</span>
               <h3 className="text-2xl font-bold mb-3 group-hover:text-emerald-200 transition-colors duration-300">Explainable AI</h3>
               <p className="text-gray-400 text-sm leading-relaxed">Why transparency in AI models like GPT, Claude, Gemini, and LLaMA is critical — and how the industry is tackling interpretability, validation metrics, and the black-box problem.</p>
+            </Link>
+            <Link href="/portfolio/blog#models-explainability" className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-orange-400/40">
+              <span className="text-xs font-semibold uppercase tracking-widest text-orange-400 mb-3 block">Decision Matrix</span>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-orange-200 transition-colors duration-300">Models Explainability</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">A structured comparison of GPT-4, BERT, EfficientNet-B0, and XGBoost across accuracy, speed, model size, interpretability, and energy efficiency — with domain-specific recommendations.</p>
             </Link>
           </div>
         </div>
